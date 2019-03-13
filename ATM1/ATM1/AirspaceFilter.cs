@@ -13,20 +13,24 @@ namespace ATM1
         // x-koordinater
         // y-koordinater
         private Track _track;
-        private ICalculate _calculate = new ICalculate(); 
-       
-
+        private ICalculate _calculate;
         private bool inAirspace;
+
+        public AirspaceFilter(ICalculate calculate)
+        {
+            _calculate = calculate;
+        }
 
         public void CheckAirspace()
         {
-            if (expr)
+            if (inAirspace = true)
             {
-                inAirspace = true;
-
-                _calculate.CalculateTrack(_track);
+                
+                _calculate.CalculateTrack(_track); // hvad skal t bruge af værdier 
             }
-            
+
         }
+
+        public void 
     }
 }
