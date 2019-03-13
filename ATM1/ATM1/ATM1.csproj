@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATMController.cs" />
-    <Compile Include="FilterAirspace.cs" />
+    <Compile Include="AirspaceFilter.cs" />
+    <Compile Include="IFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Track.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
