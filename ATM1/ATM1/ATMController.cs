@@ -7,10 +7,10 @@ using TransponderReceiver;
 
 namespace ATM1
 {
-    class ATMController
+    public class ATMController
     {
        
-        public List<string> currentSignal { get; set; }
+        public List<string> CurrentSignal { get; set; }
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
@@ -19,8 +19,9 @@ namespace ATM1
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            currentSignal = e.TransponderData;
+            CurrentSignal = e.TransponderData;
         }
+
 
     }
 }
