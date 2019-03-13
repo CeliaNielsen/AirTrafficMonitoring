@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ATMController.cs" />
+    <Compile Include="CalculateTrack.cs" />
     <Compile Include="FilterAirspace.cs" />
+    <Compile Include="ICalculate.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
