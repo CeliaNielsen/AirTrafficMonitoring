@@ -13,24 +13,30 @@ namespace ATM1
         private IConditions _conditions;
         private IFilter _filter;
         
+        
         //DTO'en
         private Track _dtoTrack;
 
         public void CalculateCompassCourse()
         {
-            int compasscourse; 
+           
 
 
         }
 
         public void CalculateSpeed()
         {
-            int speed; 
+            //For hvert airplane in airspace
 
+            //Hvis airplane stadig er i airspace 
 
+            //tidsforskellen - x og y koordinater fra første tidsstamp til andet tidsstamp 
+
+            //brug afstandsformlen og del denne værdi med tiden = hastigheden
         }
 
-        //Metode der indeholder følgende tre værdier: Trackdata,Speed, CompassCourse
+        //Metode der indeholder følgende tre værdier: Trackdata, Speed, CompassCourse
+
         public void CalculatedValues()
         {
 
