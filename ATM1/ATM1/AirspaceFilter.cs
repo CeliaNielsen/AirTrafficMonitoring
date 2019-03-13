@@ -8,10 +8,6 @@ namespace ATM1
 {
     class AirspaceFilter : IFilter
     {
-        // three-dimensional shape -> defined by a two-dimensional -> both sides being 8000 meter
-
-        // x-koordinater
-        // y-koordinater
         private Track _track;
         private ICalculate _calculate;
         private bool inAirspace;
@@ -23,14 +19,26 @@ namespace ATM1
 
         public void CheckAirspace()
         {
-            if (inAirspace = true)
+            if (_track.X <=90000 && 10000 <= _track.X && _track.Y <= 90000 && 10000 <= _track.Y)
             {
-                
-                _calculate.CalculateTrack(_track); // hvad skal t bruge af værdier 
+                inAirspace = true;
+                Update();
+            }
+            else
+            {
+                inAirspace = false;
+            }
+            
+        }
+
+        public void Update() // navn?
+        {
+            if (inAirspace == true)
+            {
+                _calculate.CalculateCompassCourse(); // hvad skal t bruge af værdier 
+                _calculate.CalculateSpeed();
             }
 
         }
-
-        public void 
     }
 }
