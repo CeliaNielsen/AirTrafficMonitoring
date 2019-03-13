@@ -9,7 +9,7 @@ namespace ATM1
 {
     public class ATMController
     {
-       
+
         public List<string> CurrentSignal { get; set; }
 
         public ATMController(ITransponderReceiver transponderReceiver)
@@ -20,8 +20,15 @@ namespace ATM1
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
             CurrentSignal = e.TransponderData;
+           
         }
 
+        public EventHandler Data;
+        public void getTransponderSignal(RawTransponderDataEventArgs e)
+        {
+            Data?.Invoke(this, e);
+
+        }
 
     }
 }

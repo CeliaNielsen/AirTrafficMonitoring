@@ -15,9 +15,8 @@ namespace ATM1
             var transponderReceiverFactory = TransponderReceiverFactory.CreateTransponderDataReceiver();
             
             ATMController atmController = new ATMController(transponderReceiverFactory);
-
-            Console.WriteLine(atmController.CurrentSignal);
-
+            
+            Console.WriteLine(atmController);
             Console.ReadKey();
         }
     }
