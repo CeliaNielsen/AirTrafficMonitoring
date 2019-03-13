@@ -46,9 +46,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirspaceFilter.cs" />
     <Compile Include="ATMController.cs" />
     <Compile Include="CalculateTrack.cs" />
     <Compile Include="ICalculate.cs" />
+    <Compile Include="IFilter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track.cs" />
