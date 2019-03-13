@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TransponderReceiver;
 
 namespace ATM1
 {
@@ -10,6 +11,14 @@ namespace ATM1
     {
         static void Main(string[] args)
         {
+
+            var transponderReceiverFactory = TransponderReceiverFactory.CreateTransponderDataReceiver();
+            
+            ATMController atmController = new ATMController(transponderReceiverFactory);
+
+            Console.WriteLine(atmController.CurrentSignal);
+
+            Console.ReadKey();
         }
     }
 }
