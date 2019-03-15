@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 using TransponderReceiver;
@@ -10,25 +11,31 @@ namespace ATM1
     public class ATMController
     {
 
-        public List<string> CurrentSignal { get; set; }
+        public List<string> TrackList { get; set; }
+        public Track _track { get; private set; }
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
             transponderReceiver.TransponderDataReady += HandleTransponderSignalEvent; // ATM forbindes til ITransponderReceiver
+            _track = new Track();
         }
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            CurrentSignal = e.TransponderData;
-           
+            TrackList = e.TransponderData;
         }
 
-        public EventHandler Data;
-        public void getTransponderSignal(RawTransponderDataEventArgs e)
+        public void sortTracklList()
         {
-            Data?.Invoke(this, e);
+            string[] array = TrackList.ToArray();
 
+            _track.Tag = array[0];
+            _track.X = Convert.ToDouble(array[1]);
+            _track.Y = Convert.ToDouble(array[2]);
+            _track.Altitude = Convert.ToDouble(array[3]);
+            _track.TimeStamp = Convert.ToDateTime(array[4]);
         }
+
 
     }
 }
