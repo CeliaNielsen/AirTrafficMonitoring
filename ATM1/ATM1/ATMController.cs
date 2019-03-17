@@ -23,9 +23,10 @@ namespace ATM1
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
             TrackList = e.TransponderData;
+            Console.WriteLine("The data list was received");
         }
 
-        public void sortTracklList()
+        public void sortTrackList()
         {
             string[] array = TrackList.ToArray();
 
