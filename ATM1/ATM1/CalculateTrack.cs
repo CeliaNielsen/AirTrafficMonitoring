@@ -24,19 +24,24 @@ namespace ATM1
 
         }
 
-        public void CalculateSpeed()
+        public double CalculateSpeed()
         {
             //For hvert airplane in airspace
+            if (_filter.CheckAirspace() == true)
+            {
 
-            //Hvis airplane stadig er i airspace 
+                //Hvis airplane stadig er i airspace 
 
-            //tidsforskellen - x og y koordinater fra første tidsstamp til andet tidsstamp 
+                //tidsforskellen - x og y koordinater fra første timestamp til andet timestamp 
 
-            //brug afstandsformlen og del denne værdi med tiden = hastigheden
+                //brug afstandsformlen og del denne værdi med tiden = hastigheden
+
+            }
+
+            return C
         }
 
         //Metode der indeholder følgende tre værdier: Trackdata, Speed, CompassCourse
-
         public void CalculatedValues()
         {
 
