@@ -10,7 +10,7 @@ namespace ATM1
     class CalculateTrack:ICalculate
     {
         //Skal have forbindelse til IConditions og IFilter 
-        private IConditions _conditions;
+        //private IConditions _conditions;
         private IFilter _filter;
         
         
