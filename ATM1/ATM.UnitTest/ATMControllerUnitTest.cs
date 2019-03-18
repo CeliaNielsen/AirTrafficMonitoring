@@ -11,7 +11,7 @@ using TransponderReceiver;
 namespace ATM.UnitTest
 {
     [TestFixture]
-    public class ATMControllerUnitTest
+    public class ATMControllerUnitTest // jfgnd
     {
         private ATMController _uut;
         //private TestTransponderReceiver _testTransponderReceiver;
