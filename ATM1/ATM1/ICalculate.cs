@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface ICalculate
+    public interface ICalculate
     {
         void CalculateCompassCourse();
 
