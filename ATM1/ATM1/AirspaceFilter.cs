@@ -22,15 +22,14 @@ namespace ATM1
 
         public bool CheckAirspace()
         {
-            if (_track.X <=90000 && 10000 <= _track.X && _track.Y <= 90000 && 10000 <= _track.Y)
+            if (_trackList[0].X <= 90000 && 10000 <= _trackList[0].X && _trackList[0].Y <= 90000 && 10000 <= _trackList[0].Y)
             {
+                
                 return inAirspace = true;
                 Update();
             }
             else
             return inAirspace = false;
-
-            
 
         }
 
