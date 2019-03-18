@@ -12,6 +12,7 @@ namespace ATM1
         private ICalculate _calculate;
         private bool inAirspace;
 
+
         public AirspaceFilter(ICalculate calculate)
         {
             _calculate = calculate;
