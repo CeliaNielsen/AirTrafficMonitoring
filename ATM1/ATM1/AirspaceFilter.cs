@@ -10,8 +10,8 @@ namespace ATM1
     {
         //private Track _track;
         //private ICalculate _calculate;
-        private bool inAirspace;
-        public List<Track> UpdatedTrackList;
+        //private bool inAirspace;
+        private List<Track> UpdatedTrackList;
 
        
         public AirspaceFilter(/*ICalculate calculate/*, List<Track> trackList*/)
@@ -20,22 +20,23 @@ namespace ATM1
             //_trackList = trackList;
         }
 
-        public void CheckAirspace(List<Track> _trackList)
+        public List<Track> CheckAirspace(List<Track> trackList)
         {
             // måske skal der laves en lokal liste som der tjekke igennem istedet, for at undgå overlap eller at listen opdateres imens den løbes igennem??
-            foreach (var track in _trackList)
+            foreach (var track in trackList)
             {
                 if (track.X <= 90000 && 10000 <= track.X && track.Y <= 90000 && 10000 <= track.Y)
                 {
-                    track.InAirspace = true;
+                    track.InAirSpace = true;
                     //Update();
                 }
                 else
-                    track.InAirspace = false;
+                    track.InAirSpace = false;
+                
             }
 
-            _trackList = UpdatedTrackList;
-            
+            trackList = UpdatedTrackList;
+            return UpdatedTrackList;
         }
 
         //public void Update() // navn?
