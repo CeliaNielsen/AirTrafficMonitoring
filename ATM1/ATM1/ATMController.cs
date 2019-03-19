@@ -29,7 +29,6 @@ namespace ATM1
 
         public void sortTrackList()
         {
-            _track = new Track();
             string[] array = TrackList.ToArray();
             
             _track.Tag = array[0];
