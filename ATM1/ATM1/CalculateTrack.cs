@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public class CalculateTrack:ICalculate
+    public class CalculateTrack/*:ICalculate*/
     {
         //Skal have forbindelse til IConditions og IFilter 
         //private IConditions _conditions;

@@ -17,23 +17,27 @@ namespace ATM1
         public ATMController(ITransponderReceiver transponderReceiver)
         {
             transponderReceiver.TransponderDataReady += HandleTransponderSignalEvent; // ATM forbindes til ITransponderReceiver
-            _track = new Track();
+            
         }
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
             TrackList = e.TransponderData;
+            Console.WriteLine("The data list was received");
+            sortTrackList(); // når nyt data er modtaget, skal dette sorteres 
         }
 
-        public void sortTracklList()
+        public void sortTrackList()
         {
+            _track = new Track();
             string[] array = TrackList.ToArray();
-
+            
             _track.Tag = array[0];
             _track.X = Convert.ToDouble(array[1]);
             _track.Y = Convert.ToDouble(array[2]);
             _track.Altitude = Convert.ToDouble(array[3]);
             _track.TimeStamp = Convert.ToDateTime(array[4]);
+
         }
 
 

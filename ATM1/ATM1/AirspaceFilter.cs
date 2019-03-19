@@ -6,30 +6,31 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class AirspaceFilter : IFilter
+    public class AirspaceFilter : IFilter
     {
         private Track _track;
         private ICalculate _calculate;
         private bool inAirspace;
+        private List<Track> _trackList;
 
 
-        public AirspaceFilter(ICalculate calculate)
+        public AirspaceFilter(ICalculate calculate, List<Track> trackList)
         {
             _calculate = calculate;
+            _trackList = trackList;
         }
 
-        public void CheckAirspace()
+        public bool CheckAirspace()
         {
-            if (_track.X <=90000 && 10000 <= _track.X && _track.Y <= 90000 && 10000 <= _track.Y)
+            if (_trackList[0].X <= 90000 && 10000 <= _trackList[0].X && _trackList[0].Y <= 90000 && 10000 <= _trackList[0].Y)
             {
-                inAirspace = true;
+                
+                return inAirspace = true;
                 Update();
             }
             else
-            {
-                inAirspace = false;
-            }
-            
+            return inAirspace = false;
+
         }
 
         public void Update() // navn?

@@ -8,6 +8,6 @@ namespace ATM1
 {
     interface IFilter
     {
-        void CheckAirspace();
+        bool CheckAirspace();
     }
 }
