@@ -8,39 +8,44 @@ namespace ATM1
 {
     public class AirspaceFilter : IFilter
     {
-        private Track _track;
-        private ICalculate _calculate;
+        //private Track _track;
+        //private ICalculate _calculate;
         private bool inAirspace;
-        private List<Track> _trackList;
+        public List<Track> UpdatedTrackList;
 
-
-        public AirspaceFilter(ICalculate calculate, List<Track> trackList)
+       
+        public AirspaceFilter(/*ICalculate calculate/*, List<Track> trackList*/)
         {
-            _calculate = calculate;
-            _trackList = trackList;
+            //_calculate = calculate;
+            //_trackList = trackList;
         }
 
-        public bool CheckAirspace()
+        public void CheckAirspace(List<Track> _trackList)
         {
-            if (_trackList[0].X <= 90000 && 10000 <= _trackList[0].X && _trackList[0].Y <= 90000 && 10000 <= _trackList[0].Y)
+            // måske skal der laves en lokal liste som der tjekke igennem istedet, for at undgå overlap eller at listen opdateres imens den løbes igennem??
+            foreach (var track in _trackList)
             {
-                
-                return inAirspace = true;
-                Update();
-            }
-            else
-            return inAirspace = false;
-
-        }
-
-        public void Update() // navn?
-        {
-            if (inAirspace == true)
-            {
-                _calculate.CalculateCompassCourse(); // hvad skal t bruge af værdier 
-                _calculate.CalculateSpeed();
+                if (track.X <= 90000 && 10000 <= track.X && track.Y <= 90000 && 10000 <= track.Y)
+                {
+                    track.InAirspace = true;
+                    //Update();
+                }
+                else
+                    track.InAirspace = false;
             }
 
+            _trackList = UpdatedTrackList;
+            
         }
+
+        //public void Update() // navn?
+        //{
+        //    if (inAirspace == true)
+        //    {
+        //        _calculate.CalculateCompassCourse(); // hvad skal t bruge af værdier 
+        //        _calculate.CalculateSpeed();
+        //    }
+
+        //}
     }
 }

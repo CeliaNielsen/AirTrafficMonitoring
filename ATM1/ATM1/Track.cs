@@ -13,6 +13,7 @@ namespace ATM1
         public double Y { get; set; }
         public double Altitude { get; set; }
         public DateTime TimeStamp { get; set; }
+        public bool InAirspace { get; set; } = false;
 
         public Track(string tag, double x, double y, double altitude, DateTime timeStamp)
         {
