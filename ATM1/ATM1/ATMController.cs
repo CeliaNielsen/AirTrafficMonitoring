@@ -11,8 +11,13 @@ namespace ATM1
     public class ATMController
     {
 
-        public List<string> TrackList { get; set; }
+        public List<string> RawTrackList { get; set; }
+        private List<Track> sortedTrackList_;
+
         public Track _track { get; private set; }
+
+        private IFilter airspaceFilter_;
+        private ICalculate calculateTrack_;
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
@@ -22,21 +27,27 @@ namespace ATM1
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            TrackList = e.TransponderData;
+            RawTrackList = e.TransponderData;
             Console.WriteLine("The data list was received");
-            sortTrackList(); // når nyt data er modtaget, skal dette sorteres 
         }
 
-        public void sortTrackList()
+        public void sortTrackList(List<string> rawTracklist) 
         {
-            _track = new Track();
-            string[] array = TrackList.ToArray();
+            foreach (var track in rawTracklist)
+            {
+                string[] array = track.Split(';');
+
+                sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]), Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
+                    System.Globalization.CultureInfo.InvariantCulture), false));
+
+            }
+        }
+
+        public void Start()
+        {
+            sortTrackList(RawTrackList);
+            airspaceFilter_.CheckAirspace(sortedTrackList_);
             
-            _track.Tag = array[0];
-            _track.X = Convert.ToDouble(array[1]);
-            _track.Y = Convert.ToDouble(array[2]);
-            _track.Altitude = Convert.ToDouble(array[3]);
-            _track.TimeStamp = Convert.ToDateTime(array[4]);
 
         }
 
