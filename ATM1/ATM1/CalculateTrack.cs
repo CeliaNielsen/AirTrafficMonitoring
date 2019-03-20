@@ -9,52 +9,56 @@ namespace ATM1
 {
     public class CalculateTrack:ICalculate
     {
-        private IFilter _filter;
-        private List<Track> _trackList;
+        private List<Track> _updatedTrackList;
+        private TrackPrint _trackprint;
 
-        public string CalculateCompassCourse(List<Track> trackList)
+        public CalculateTrack()
         {
-            string compassCourse = null;
+            _trackprint.PrintTrack(_updatedTrackList);
+        }
+
+        public void CalculateCompassCourse(List<Track> trackList)
+        { 
             foreach (var airplane in trackList)
             {
                 if (airplane.X > 0 && airplane.Y > 0)
                 {
-                    compassCourse = "North East";
+                    airplane.CompassCourse = "North East";
                 }
                 else if (airplane.X > 0 && airplane.Y < 0)
                 {
-                    compassCourse = "South East";
+                    airplane.CompassCourse = "South East";
                 }
                 else if (airplane.X < 0 && airplane.Y > 0)
                 {
-                    compassCourse = "North West";
+                    airplane.CompassCourse = "North West";
                 }
                 else if (airplane.X < 0 && airplane.Y < 0)
                 {
-                    compassCourse = "South West";
+                    airplane.CompassCourse = "South West";
                 }
                 else if (airplane.X == 0 && airplane.Y > 0)
                 {
-                    compassCourse = "North";
+                    airplane.CompassCourse = "North";
                 }
                 else if (airplane.X == 0 && airplane.Y < 0)
                 {
-                    compassCourse = "South";
+                    airplane.CompassCourse = "South";
                 }
                 else if (airplane.X > 0 && airplane.Y == 0)
                 {
-                    compassCourse = "East";
+                    airplane.CompassCourse = "East";
                 }
                 else
                 {
-                    compassCourse = "West"; 
-                }
+                    airplane.CompassCourse = "West"; 
+                }        
             }
-            return compassCourse;
+            _updatedTrackList = trackList;
         }
-        public double CalculateSpeed(List<Track> trackList)
-        {
-            double speed = 0;
+
+        public void CalculateSpeed(List<Track> trackList)
+        {      
             foreach (var airplane in trackList) //har vi en liste med de fly som er i airspace? 
             {
                 DateTime t1 = airplane.TimeStamp;
@@ -77,10 +81,15 @@ namespace ATM1
 
                     //Hastigheden fås ved tidsforskellen delt med afstanden
                     double speed1 = distance / Convert.ToDouble(td);
-                    speed = speed1;
+                    airplane.Speed = speed1;      
                 }
             }
-            return speed;
+            
+            _updatedTrackList = trackList;
+            CalculateCompassCourse(trackList);
+            
         }
+
+
     }
 }
