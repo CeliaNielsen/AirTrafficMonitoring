@@ -57,9 +57,11 @@
     <Compile Include="CalculateTrack.cs" />
     <Compile Include="ICalculate.cs" />
     <Compile Include="IFilter.cs" />
+    <Compile Include="ITrackPrint.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Track.cs" />
+    <Compile Include="TrackPrint.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

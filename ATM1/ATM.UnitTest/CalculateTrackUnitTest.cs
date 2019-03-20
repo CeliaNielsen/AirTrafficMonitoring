@@ -20,6 +20,10 @@ namespace ATM.UnitTest
             //CalculateCompass()
 
             //CalculateSpeed()
+
+            //to positioner med (x og y) og sætter timestamp --> udregn afstand 
+            //Vælg testdata så du ved hvad output giver! 
+            //Prøv også med fortegn 
         }
 
     }

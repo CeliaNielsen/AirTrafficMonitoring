@@ -12,39 +12,72 @@ namespace ATM1
         private IFilter _filter;
         private List<Track> _trackList;
 
-
-        public void CalculateCompassCourse()
+        public string CalculateCompassCourse(List<Track> trackList)
         {
-           
+            string compassCourse = null;
+            foreach (var airplane in trackList)
+            {
+                if (airplane.X > 0 && airplane.Y > 0)
+                {
+                    compassCourse = "North East";
+                }
+                else if (airplane.X > 0 && airplane.Y < 0)
+                {
+                    compassCourse = "South East";
+                }
+                else if (airplane.X < 0 && airplane.Y > 0)
+                {
+                    compassCourse = "North West";
+                }
+                else if (airplane.X < 0 && airplane.Y < 0)
+                {
+                    compassCourse = "South West";
+                }
+                else if (airplane.X == 0 && airplane.Y > 0)
+                {
+                    compassCourse = "North";
+                }
+                else if (airplane.X == 0 && airplane.Y < 0)
+                {
+                    compassCourse = "South";
+                }
+                else if (airplane.X > 0 && airplane.Y == 0)
+                {
+                    compassCourse = "East";
+                }
+                else
+                {
+                    compassCourse = "West"; 
+                }
+            }
+            return compassCourse;
         }
         public double CalculateSpeed(List<Track> trackList)
         {
             double speed = 0;
             foreach (var airplane in trackList) //har vi en liste med de fly som er i airspace? 
             {
-                //DateTime t1 = _dtoTrack.TimeStamp;
-                //double x1 = _dtoTrack.X;
-                //double y1 = _dtoTrack.Y;
-                //string tag1 = _dtoTrack.Tag; 
+                DateTime t1 = airplane.TimeStamp;
+                double x1 = airplane.X;
+                double y1 = airplane.Y;
+                string tag1 = airplane.Tag; 
 
-                if (trackList.tag == tag1 && _trackList.X != x1 && _trackList.Y != y1) //når samme tag opstår i listen, så den udregne  
+                if (airplane.Tag == tag1 && airplane.X != x1 && airplane.Y != y1) //når samme tag opstår i listen, så den udregne  
                 {
-                    //Hvis vi siger tag1 = tag, så tager den vel bare samme track? vi skal finde en måde at sikre på at det er en anden placering/track
 
+                    DateTime t2 = airplane.TimeStamp;
+                    double x2 = airplane.X;
+                    double y2 = airplane.Y;
 
-                    //DateTime t2 = _dtoTrack.TimeStamp;
-                    //double x2 = _dtoTrack.X;
-                    //double y2 = _dtoTrack.Y;
-        
-                    //Tidsforskellen 
-                    //TimeSpan td = t2-t1; 
+                    //Tidsforskellen
+                    TimeSpan td = t2 - t1;
 
-                    //Afstanden er x og y koordinater fra første timestamp til andet timestamp (afstandsformlen)
-                    //double distance = Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
+                    //Afstanden er x og y koordinater fra første timestamp til andet timestamp(afstandsformlen)
+                    double distance = Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
 
                     //Hastigheden fås ved tidsforskellen delt med afstanden
-                    //double speed1 = distance / Convert.ToDouble(td);
-                    //speed = speed1;
+                    double speed1 = distance / Convert.ToDouble(td);
+                    speed = speed1;
                 }
             }
             return speed;
