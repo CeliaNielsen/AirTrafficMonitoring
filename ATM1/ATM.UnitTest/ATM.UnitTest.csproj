@@ -62,6 +62,7 @@
   <ItemGroup>
     <Compile Include="AirspaceFilterUnitTest.cs" />
     <Compile Include="ATMControllerUnitTest.cs" />
+    <Compile Include="CalculateTrackUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
