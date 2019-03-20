@@ -12,7 +12,6 @@ namespace ATM1
         private List<Track> _updatedTrackList;
         private TrackPrint _trackprint;
 
-
         public void CalculateCompassCourse(List<Track> trackList)
         { 
             foreach (var airplane in trackList)
