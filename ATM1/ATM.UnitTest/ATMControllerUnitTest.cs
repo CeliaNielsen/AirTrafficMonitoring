@@ -11,7 +11,7 @@ using TransponderReceiver;
 namespace ATM.UnitTest
 {
     [TestFixture]
-    public class ATMControllerUnitTest // jfgnd
+    public class ATMControllerUnitTest 
     {
         private ATMController _uut;
         //private TestTransponderReceiver _testTransponderReceiver;
@@ -29,7 +29,7 @@ namespace ATM.UnitTest
         {
             List<string> currentList = new List<string>(); 
             _ITransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(currentList));
-            Assert.That(_uut.TrackList, Is.EqualTo(currentList));
+            Assert.That(_uut.RawTrackList, Is.EqualTo(currentList));
         }
     }
 
