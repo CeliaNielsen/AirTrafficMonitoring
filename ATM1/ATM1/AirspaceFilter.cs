@@ -29,13 +29,13 @@ namespace ATM1
                 {
                     track.InAirSpace = true;
                     //Update();
+                    UpdatedTrackList.Add(track);
                 }
                 else
                     track.InAirSpace = false;
                 
             }
 
-            trackList = UpdatedTrackList;
             return UpdatedTrackList;
         }
 
