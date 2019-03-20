@@ -11,9 +11,8 @@ namespace ATM1
     public class ATMController
     {
 
-        public List<string> RawTrackList { get; private set; }
+        public List<string> RawTrackList { get; set; }
         public List<Track> sortedTrackList_ { get; private set;}
-
         public Track _track { get; private set; }
 
         private IFilter airspaceFilter_;
@@ -29,7 +28,7 @@ namespace ATM1
         {
             RawTrackList = e.TransponderData;
             Console.WriteLine("The data list was received");
-            sortTrackList(RawTrackList);
+            Start();
         }
 
         public List<Track> sortTrackList(List<string> rawTracklist)
@@ -40,7 +39,7 @@ namespace ATM1
                 string[] array = track.Split(';');
 
                 sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]), Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                    System.Globalization.CultureInfo.InvariantCulture), Convert.ToBoolean(false)));
+                    System.Globalization.CultureInfo.InvariantCulture), Convert.ToBoolean(array[5]) == false, array[6],Convert.ToDouble(array[7])));
             }
             
             return sortedTrackList_;

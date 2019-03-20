@@ -19,7 +19,6 @@ namespace ATM.UnitTest
         public void SetUp()
         {
             _uut = new CalculateTrack();
-            _atmController = Substitute.For<ATMController>();
 
             //CalculateCompass()
 
@@ -33,12 +32,12 @@ namespace ATM.UnitTest
         [Test]
         public void CalculateTrack_calculateSpeed_returnResult()
         {
-            List<Track> currentList = new List<Track>();
-            currentList.Add(new Track("ATR423", 3, 4, 100, DateTime.Today, false));
+        //    List<Track> currentList = new List<Track>();
+        //    currentList.Add(new Track("ATR423", 0, 0, 100, DateTime.Today, true, null, 0));
+        //    currentList.Add(new Track("ATR423", 3, 4, 100, DateTime.Today, true, null, 0));
+
                 
-
-
-            Assert.That(_uut.CalculateSpeed(currentList)[7], Is.EqualTo(5));
+        //    Assert.That(_uut._updatedTrackList[7], Is.EqualTo(5));
         }
 
     }

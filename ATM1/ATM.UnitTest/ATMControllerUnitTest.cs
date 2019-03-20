@@ -37,11 +37,12 @@ namespace ATM.UnitTest
         public void ATMController_sortTrackList_ListSplited()
         {
             List<string> currentList = new List<string>();
-            currentList.Add("ATR423;39045;12932;14000;20151006213456789;false");
+            currentList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
            
             Assert.That(_uut.sortTrackList(currentList)[0].Tag, Is.EqualTo("ATR423"));
-             
         }
+
+        
     }
 
     internal class TestTransponderReceiver : ITransponderReceiver

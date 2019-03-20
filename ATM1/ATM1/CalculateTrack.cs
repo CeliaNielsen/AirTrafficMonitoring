@@ -9,7 +9,7 @@ namespace ATM1
 {
     public class CalculateTrack:ICalculate
     {
-        private List<Track> _updatedTrackList;
+        public List<Track> _updatedTrackList { get; private set; }
         private TrackPrint _trackprint;
 
         public void CalculateCompassCourse(List<Track> trackList)
@@ -53,7 +53,7 @@ namespace ATM1
         }
 
         public void CalculateSpeed(List<Track> trackList)
-        {      
+        {  
             foreach (var airplane in trackList) //har vi en liste med de fly som er i airspace? 
             {
                 DateTime t1 = airplane.TimeStamp;
