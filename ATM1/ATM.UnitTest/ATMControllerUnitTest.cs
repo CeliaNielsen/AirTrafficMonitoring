@@ -11,11 +11,12 @@ using TransponderReceiver;
 namespace ATM.UnitTest
 {
     [TestFixture]
-    public class ATMControllerUnitTest 
+    public class ATMControllerUnitTest
     {
         private ATMController _uut;
         //private TestTransponderReceiver _testTransponderReceiver;
         private ITransponderReceiver _ITransponderReceiver;
+        private RawTransponderDataEventArgs _transponderEvent ;
 
         [SetUp]
         public void SetUp()
@@ -27,9 +28,19 @@ namespace ATM.UnitTest
         [Test]
         public void ATMController_EventFired_ListReceiced()
         {
-            List<string> currentList = new List<string>(); 
+            List<string> currentList = new List<string>();
             _ITransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(currentList));
             Assert.That(_uut.RawTrackList, Is.EqualTo(currentList));
+        }
+
+        [Test]
+        public void ATMController_sortTrackList_ListSplited()
+        {
+            List<string> currentList = new List<string>();
+            currentList.Add("ATR423;39045;12932;14000;20151006213456789;false");
+           
+            Assert.That(_uut.sortTrackList(currentList)[0].Tag, Is.EqualTo("ATR423"));
+             
         }
     }
 
