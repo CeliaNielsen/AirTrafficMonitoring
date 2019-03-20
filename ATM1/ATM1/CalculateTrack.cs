@@ -12,10 +12,6 @@ namespace ATM1
         private List<Track> _updatedTrackList;
         private TrackPrint _trackprint;
 
-        public CalculateTrack()
-        {
-            _trackprint.PrintTrack(_updatedTrackList);
-        }
 
         public void CalculateCompassCourse(List<Track> trackList)
         { 
@@ -83,13 +79,15 @@ namespace ATM1
                     double speed1 = distance / Convert.ToDouble(td);
                     airplane.Speed = speed1;      
                 }
-            }
-            
+            } 
             _updatedTrackList = trackList;
-            CalculateCompassCourse(trackList);
-            
+            CalculateCompassCourse(trackList);     
         }
 
+        public void PrintTrack()
+        {
+            _trackprint.PrintTrack(_updatedTrackList);
+        }
 
     }
 }

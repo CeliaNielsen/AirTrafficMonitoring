@@ -8,7 +8,7 @@ namespace ATM1
 {
    public class TrackPrint:ITrackPrint
     {
-        public void PrintTrack(List<CalculateTrack> updatedTrackList)
+        public void PrintTrack(List<Track> updatedTrackList)
         {
             Console.WriteLine(updatedTrackList);    
         }

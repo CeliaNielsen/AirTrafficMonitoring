@@ -8,6 +8,6 @@ namespace ATM1
 {
     interface ITrackPrint
     {
-        void PrintTrack(List<CalculateTrack> updatedTrackList);
+        void PrintTrack(List<Track> updatedTrackList);
     }
 }
