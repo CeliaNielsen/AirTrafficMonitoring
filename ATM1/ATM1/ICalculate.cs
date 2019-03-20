@@ -10,8 +10,8 @@ namespace ATM1
     {
         void CalculateCompassCourse();
 
-        double CalculateSpeed();
+        double CalculateSpeed(List<Track> trackList);
 
-        void CalculatedValues(); 
+        
     }
 }
