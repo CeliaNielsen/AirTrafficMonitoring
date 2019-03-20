@@ -8,10 +8,9 @@ namespace ATM1
 {
     public interface ICalculate
     {
-        void CalculateCompassCourse();
+        void CalculateCompassCourse(List<Track> trackList);
 
-        double CalculateSpeed();
-
-        void CalculatedValues(); 
+        void CalculateSpeed(List<Track> trackList);
+        void PrintTrack(); 
     }
 }
