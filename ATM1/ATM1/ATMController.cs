@@ -47,8 +47,6 @@ namespace ATM1
         {
             sortTrackList(RawTrackList);
             airspaceFilter_.CheckAirspace(sortedTrackList_);
-            
-            
 
         }
 
