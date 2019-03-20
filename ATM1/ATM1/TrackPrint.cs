@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class TrackPrint:ITrackPrint
+   public class TrackPrint:ITrackPrint
     {
-        public void PrintTrack()
+        public void PrintTrack(List<Track> updatedTrackList)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(updatedTrackList);    
         }
     }
 }

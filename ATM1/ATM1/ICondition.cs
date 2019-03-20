@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface ITrackPrint
+    interface ICondition
     {
-        void PrintTrack(List<Track> updatedTrackList);
     }
 }

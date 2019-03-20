@@ -15,6 +15,8 @@ namespace ATM1
         public double Altitude { get; set; }
         public DateTime TimeStamp { get; set; }
         public bool InAirSpace { get; set; } = false;
+        public string CompassCourse { get; set; }
+        public double Speed { get; set; }
 
         public Track(string tag, double x, double y, double altitude, DateTime timeStamp, bool inAirSpace)
         {
