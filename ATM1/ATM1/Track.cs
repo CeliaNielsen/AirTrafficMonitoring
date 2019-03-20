@@ -18,7 +18,7 @@ namespace ATM1
         public string CompassCourse { get; set; }
         public double Speed { get; set; }
 
-        public Track(string tag, double x, double y, double altitude, DateTime timeStamp, bool inAirSpace)
+        public Track(string tag, double x, double y, double altitude, DateTime timeStamp, bool inAirSpace, string compassCourse, double speed)
         {
             Tag = tag;
             X = x;
@@ -26,6 +26,8 @@ namespace ATM1
             Altitude = altitude;
             TimeStamp = timeStamp;
             InAirSpace = inAirSpace;
+            CompassCourse = compassCourse;
+            Speed = speed; 
         }
 
 
