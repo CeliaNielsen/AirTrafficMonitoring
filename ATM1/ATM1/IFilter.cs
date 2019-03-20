@@ -8,6 +8,6 @@ namespace ATM1
 {
     interface IFilter
     {
-        void CheckAirspace(List<Track> _trackList);
+        List<Track> CheckAirspace(List<Track> _trackList);
     }
 }
