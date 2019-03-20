@@ -79,6 +79,8 @@ namespace ATM1
                     double speed1 = distance / Convert.ToDouble(td);
                     speed = speed1;
                 }
+
+                
             }
             return speed;
         }
