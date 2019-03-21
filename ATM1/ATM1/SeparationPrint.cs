@@ -40,6 +40,6 @@ namespace ATM1
             //Console.Clear(); // ved ikke om dette virker ?? -> den skal slette udksriften hvis ikke der er konflikt 
             
             
-        }
-    }
+    //    }
+    //}
 }

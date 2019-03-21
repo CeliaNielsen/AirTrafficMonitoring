@@ -9,8 +9,12 @@ namespace ATM1
 {
     public class CalculateTrack:ICalculate
     {
-        private List<Track> _updatedTrackList;
+        public List<Track> _updatedTrackList { get; private set; }
         private TrackPrint _trackprint;
+        private DateTime t1;
+        private double x1;
+        private double y1;
+        private string tag1;
 
         public void CalculateCompassCourse(List<Track> trackList)
         { 
@@ -53,15 +57,18 @@ namespace ATM1
         }
 
         public void CalculateSpeed(List<Track> trackList)
-        {      
+        {  
             foreach (var airplane in trackList) //har vi en liste med de fly som er i airspace? 
             {
-                DateTime t1 = airplane.TimeStamp;
-                double x1 = airplane.X;
-                double y1 = airplane.Y;
-                string tag1 = airplane.Tag; 
+                //t1 = airplane.TimeStamp;
+                //double x1 = airplane.X;
+                //double y1 = airplane.Y;
+                //string tag1 = airplane.Tag; 
+                //forkert 
 
-                if (airplane.Tag == tag1 && airplane.X != x1 && airplane.Y != y1) //når samme tag opstår i listen, så den udregne  
+                //Gennemløb listen og se om den er i listen, hvis den ikke er i listen, skal den tilføjes. 
+
+                if (airplane.Tag == tag1 && airplane.X != x1 || airplane.Y != y1) //når samme tag opstår i listen, så den udregne  
                 {
 
                     DateTime t2 = airplane.TimeStamp;

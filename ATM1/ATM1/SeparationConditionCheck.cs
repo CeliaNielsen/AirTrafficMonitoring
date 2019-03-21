@@ -48,10 +48,10 @@ namespace ATM1
 
                 SeparationCondition(separationList);
 
-            }
+        //    }
                 
             
-        }
+        //}
 
         public void SeparationCondition(List<SeparationValues> svList /*int nr, DateTime time, string tag1, string tag2, bool separation*/)
         {

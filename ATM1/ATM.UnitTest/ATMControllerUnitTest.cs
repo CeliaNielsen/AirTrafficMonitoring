@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM1;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using NUnit.Framework;
 using TransponderReceiver;
 
@@ -17,12 +19,16 @@ namespace ATM.UnitTest
         //private TestTransponderReceiver _testTransponderReceiver;
         private ITransponderReceiver _ITransponderReceiver;
         private RawTransponderDataEventArgs _transponderEvent ;
+        private ICalculate _calculate;
+        private IFilter _filter;
 
         [SetUp]
         public void SetUp()
         {
             _ITransponderReceiver = Substitute.For<ITransponderReceiver>();
             _uut = new ATMController(_ITransponderReceiver);
+            _calculate = Substitute.For<ICalculate>();
+            _filter = Substitute.For<IFilter>();
         }
 
         [Test]
@@ -37,21 +43,18 @@ namespace ATM.UnitTest
         public void ATMController_sortTrackList_ListSplited()
         {
             List<string> currentList = new List<string>();
-            currentList.Add("ATR423;39045;12932;14000;20151006213456789;false");
+            currentList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
            
             Assert.That(_uut.sortTrackList(currentList)[0].Tag, Is.EqualTo("ATR423"));
-             
         }
-    }
 
-    internal class TestTransponderReceiver : ITransponderReceiver
-    {
-        public event EventHandler<RawTransponderDataEventArgs> TransponderDataReady;
-
-        public void RaiseEvent(List<string> dataList)
+        [Test]
+        public void ATMController_startMethod_callsCalculate()
         {
-            TransponderDataReady?.Invoke(this, new RawTransponderDataEventArgs(dataList));
+            _uut.Start();
+            _calculate.Received().CalculateSpeed(new List<Track>());
         }
+        
     }
 
 }
