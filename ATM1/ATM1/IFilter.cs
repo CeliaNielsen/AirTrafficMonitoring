@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface IFilter
+    public interface IFilter
     {
         List<Track> CheckAirspace(List<Track> _trackList);
     }
