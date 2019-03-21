@@ -10,7 +10,11 @@ namespace ATM1
     {
         public void PrintTrack(List<Track> updatedTrackList)
         {
-            Console.WriteLine(updatedTrackList);    
+            foreach (var track in updatedTrackList)
+            {
+                Console.WriteLine("Tag: "+track.Tag+" X: "+track.X+" Y: "+track.Y+" Altitude: "+track.Altitude+" Timestamp: "+track.TimeStamp+" InAirspace: "+track.InAirSpace+" Compasscourse: "+track.CompassCourse+" Speed: "+track.Speed);
+            }
+               
         }
     }
 }
