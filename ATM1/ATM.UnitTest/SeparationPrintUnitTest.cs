@@ -42,7 +42,8 @@ namespace ATM.UnitTest
             _fakeSeparationValuesesList.Add(new SeparationValues(1, "WQA123", "UQK123", DateTime.Now, true));
 
             _uut.PrintSeparation(_fakeSeparationValuesesList);
-            
+
+            Assert.That(_fakeSeparationValuesesList[0].Tag1, Is.EqualTo("PLO123")); // som det er nu kan den ikke teste hvad der udskrives men kun hvad der er i listen
             //hvordan tester jeg at der udksrives?
         }
     }

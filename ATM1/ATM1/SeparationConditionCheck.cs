@@ -25,7 +25,8 @@ namespace ATM1
         public SeparationConditionCheck()
         {
             separationList = new List<SeparationValues>();
-           
+            separationsPrint = new SeparationPrint();
+
         }
 
         public void CheckForSeparation(List<Track> updatedList)
@@ -36,7 +37,7 @@ namespace ATM1
                 {
                     //if (track.Y != updatedList[i].Y && track.X != updatedList[i].X ) // hvis den ikke er lig med det track fra foreach løkken
                     //{
-                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000 && Math.Abs(track.Y - updatedList[i].Y) > -300 && Math.Abs(track.X - updatedList[i].X) > -5000) // checker for konflikt med den foran
+                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000 /*|| (track.Y - updatedList[i].Y) < -300 && (track.X - updatedList[i].X) < -5000*/) // checker for konflikt med den foran
                         {
                             _time = updatedList[i].TimeStamp;
                             _tag1 = updatedList[i].Tag;
