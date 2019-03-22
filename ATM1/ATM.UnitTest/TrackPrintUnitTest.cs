@@ -16,7 +16,6 @@ namespace ATM.UnitTest
         private ITrackPrint _trackprint;
         private CalculateTrack _calculatetrack;
         
-
         [SetUp]
         public void SetUp()
         {
@@ -24,8 +23,18 @@ namespace ATM.UnitTest
             _calculatetrack = Substitute.For<CalculateTrack>();
             _uut = new TrackPrint();
         }
-        //tilstandstest for at se om den printer ud det rigtige 
-        //adfærdstest med calculatetrack for at se om den får noget med 
 
+        [Test]
+        //tilstandstest for at se om den printer ud det rigtige 
+        public void TrackPrint_PrintTrack_TrackPrinted()
+        {
+
+        }
+
+        [Test]
+        public void TrackPrint_calledByCalculate_ListReceived() //test for om streng modtages 
+        {
+            
+        }
     }
 }
