@@ -15,42 +15,40 @@ namespace ATM.UnitTest
     class AirspaceFilterUnitTest
     {
         private AirspaceFilter _uut;
-        private ICalculate _iICalculate;
-        private Track _track;
-        private List<Track> TrackList1;
+        private List<Track> _trackList;
+        private ATMController _atmController;
 
         [SetUp]
         public void SetUp()
         {
-            _iICalculate = Substitute.For<ICalculate>(); // fake oprettes
-                                                         //_track = Substitute.For<Track>();
-            TrackList1 = new List<Track>();
-
-
-            _uut = new AirspaceFilter(_iICalculate, TrackList1);
-
-            //Track inside_track1 = new Track("JCT123", 60000.1, 40000, 40, DateTime.Now);
-            //Track inside_track2 = new Track("JCT124", 10000, 10000, 40, DateTime.Now);
-            //Track outside_track1 = new Track("JCT125", 3000.1, 90000, 40, DateTime.Now);
+            _trackList= new List<Track>();
+            _uut = new AirspaceFilter();
         }
 
-        [Test]
-        public void CheckAirspace_TrackIsInside_true()
+        [TestCase(60000,40000)]
+        [TestCase(50000, 40000)]
+        [TestCase(90000, 90000)]
+        public void CheckAirspace_TrackIsInside_returnsTrue(double x, double y)
         {
+            _trackList.Add(new Track("JCT123", x, y, 500, DateTime.Now, false,"North",90));
 
-            TrackList1.Add(new Track("JCT123", 60000.1, 40000, 40, DateTime.Now));
-            TrackList1.Add(new Track("JCT124", 10000, 10000, 40, DateTime.Now));
-
-            Assert.That(_uut.CheckAirspace(), Is.True);
+            Assert.That(_uut.CheckAirspace(_trackList)[0].InAirSpace, Is.EqualTo(true));
 
         }
 
-        [Test]
-        public void CheckAirspace_TrackIsInside_false()
+        [TestCase(300, 300)]
+        [TestCase(-200, 400)]
+        [TestCase(-200,-200)]
+        [TestCase(95000, 95000)]
+        [TestCase(-95000, 95000)]
+        public void CheckAirspace_TrackIsOutside_returnsFalse(double x, double y)
         {
-            TrackList1.Add(new Track("JCT125", 3000.1, 90000, 40, DateTime.Now));
-            Assert.That(_uut.CheckAirspace(), Is.False);
+            _trackList.Add(new Track("JCT123", x, y, 500, DateTime.Now, true, "North", 90));
 
+            foreach (var track in _uut.CheckAirspace(_trackList))
+            {
+                Assert.That(track.InAirSpace, Is.EqualTo(false));
+            }
         }
     }
 
