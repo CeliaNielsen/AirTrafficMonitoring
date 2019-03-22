@@ -37,7 +37,6 @@ namespace ATM1
         public List<Track> sortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_ = new List<Track>();
-           rawTracklist = new List<string>();
             foreach (var track in rawTracklist)
             {
                 string[] array = track.Split(';');
