@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface ISeparationsPrint
+    public interface ISeparationsPrint
     {
         void PrintSeparation(List<SeparationValues> svList/*int nr, DateTime time, string tag1, string tag2, bool separation*/);
     }

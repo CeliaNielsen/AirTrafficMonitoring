@@ -13,7 +13,7 @@ namespace ATM1
         static void Main(string[] args)
         {
             var transponderReceiverFactory = TransponderReceiverFactory.CreateTransponderDataReceiver();
-
+            
             ATMController atmController = new ATMController(transponderReceiverFactory);
 
             //Thread atmThread = new Thread(atmController.Start);

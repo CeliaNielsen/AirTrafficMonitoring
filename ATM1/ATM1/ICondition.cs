@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface ICondition
+    public interface ICondition
     {
+        void CheckForSeparation(List<Track> updatedList);
+        void SeparationCondition(List<SeparationValues> svList);
     }
 }
