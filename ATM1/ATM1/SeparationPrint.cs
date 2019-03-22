@@ -6,17 +6,11 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class SeparationPrint : ISeparationsPrint 
+    public class SeparationPrint : ISeparationsPrint 
     {
         public void PrintSeparation(List<SeparationValues> svList/*int nr, DateTime time, string tag1, string tag2, bool separation*/)
         {
-            //if (separation == true)
-            //{
-            //    Console.WriteLine("SEPARATION CONDITION \r\n" + "nr: " + nr + "Time: " + time + "tag A: " + tag1 + "tag B" + tag2);
-            //}
-
-            //foreach (var sv in svList)
-            //{
+            
                 foreach (var sv in svList)
                 {
                     if (sv.Conflict == true)
@@ -40,6 +34,6 @@ namespace ATM1
             //Console.Clear(); // ved ikke om dette virker ?? -> den skal slette udksriften hvis ikke der er konflikt 
             
             
-    //    }
-    //}
+        }
+    }
 }

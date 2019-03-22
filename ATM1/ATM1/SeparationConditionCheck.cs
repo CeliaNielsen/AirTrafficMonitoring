@@ -7,20 +7,26 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class SeparationConditionCheck : ICondition
+    public class SeparationConditionCheck : ICondition
     {
         private DateTime _time;
         private string _tag1;
         private string _tag2;
         private int _nr;
         private bool separtion = false;
-        private List<SeparationValues> separationList;
+        public List<SeparationValues> separationList;
 
         private int cnt = 1; // 1 da den så ikke starter med at sammenligne med sig selv
         
 
         private ISeparationLog separationLog;
         private ISeparationsPrint separationsPrint;
+
+        public SeparationConditionCheck()
+        {
+            separationList = new List<SeparationValues>();
+           
+        }
 
         public void CheckForSeparation(List<Track> updatedList)
         {
@@ -30,11 +36,11 @@ namespace ATM1
                 {
                     //if (track.Y != updatedList[i].Y && track.X != updatedList[i].X ) // hvis den ikke er lig med det track fra foreach løkken
                     //{
-                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000) // checker for konflikt med den foran
+                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000 && Math.Abs(track.Y - updatedList[i].Y) > -300 && Math.Abs(track.X - updatedList[i].X) > -5000) // checker for konflikt med den foran
                         {
-                            updatedList[i].TimeStamp = _time;
-                            updatedList[i].Tag = _tag1;
-                            track.Tag = _tag2;
+                            _time = updatedList[i].TimeStamp;
+                            _tag1 = updatedList[i].Tag;
+                            _tag2 = track.Tag ;
 
                             separationList.Add(new SeparationValues(_nr += 1, _tag1, _tag2, _time, separtion = true));
 
@@ -48,16 +54,16 @@ namespace ATM1
 
                 SeparationCondition(separationList);
 
-        //    }
+         }
                 
             
-        //}
+        }
 
         public void SeparationCondition(List<SeparationValues> svList /*int nr, DateTime time, string tag1, string tag2, bool separation*/)
         {
             //OBS: “Separation” condition shall remain raised as long as the two tracks are conflicting.
 
-            separationsPrint.PrintSeparation(separationList);
+            separationsPrint.PrintSeparation(svList);
         }
 
         //public void DeactivateSeparation(string tag3, string tag4)
