@@ -50,6 +50,7 @@ namespace ATM1
             sortTrackList(RawTrackList);
             calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
 
+
         }
 
 
