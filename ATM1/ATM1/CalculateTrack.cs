@@ -11,14 +11,14 @@ namespace ATM1
     {
         public List<Track> _updatedTrackList { get; private set; }
         private List<Track> _oldTrackList;
-        private ITrackPrint _trackprint;
+        private IPrint _trackprint;
   
 
         public CalculateTrack()
         {
             _oldTrackList= new List<Track>();
             _updatedTrackList = new List<Track>();
-            _trackprint = new TrackPrint();
+            _trackprint = new TrackFormat();
         }
         public void CalculateCompassCourse(List<Track> trackList)
         { 

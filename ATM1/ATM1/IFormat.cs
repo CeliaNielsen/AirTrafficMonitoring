@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public interface ITrackPrint
+    interface IFormat
     {
-        void PrintTrack(List<Track> updatedTrackList);
+        void FormatTrack(List<Track> updatedTrackList);
     }
 }
