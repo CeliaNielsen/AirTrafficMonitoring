@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public class SeparationPrint : IPrint
+    interface ITrackFormat
     {
-        public void Print(string s)
-        {
-            Console.WriteLine(s);
-        }
+        void Format(List<Track> updatedTrackList);
     }
-    
 }

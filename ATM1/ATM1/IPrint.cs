@@ -8,6 +8,6 @@ namespace ATM1
 {
     public interface IPrint
     {
-        void Print();
+        void Print(string s);
     }
 }

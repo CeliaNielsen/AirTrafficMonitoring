@@ -6,11 +6,26 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class SeparationFormat:IFormat
+    class SeparationFormat:ISeparationFormat
     {
-        public void Format()
+        private IPrint _print;
+        private string s;
+
+        public SeparationFormat()
         {
-            throw new NotImplementedException();
+            _print = new SeparationPrint();
+        }
+
+        public void Format(List<SeparationValues> svList)
+        {
+            foreach (var sv in svList)
+            {
+                s = Convert.ToString("SEPARATION CONDITION: \r\n" + "nr: " + sv.Nr + ", Time: " + sv.Time +
+                                     ", tag A: " + sv.Tag1 + ", tag B" + sv.Tag2);
+                _print.Print(s);
+
+
+            }
         }
     }
 }

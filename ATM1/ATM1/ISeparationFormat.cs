@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface IFormat
+    interface ISeparationFormat
     {
-        void Format();
+        void Format(List<SeparationValues> list);
     }
 }

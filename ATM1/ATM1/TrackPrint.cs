@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 namespace ATM1
 {
     class TrackPrint :IPrint
-    {      
-        public void Print()
+    {
+        public void Print(string s)
         {
-            //Skal printe streng 
-            //Console.WriteLine("Tag: "+track.Tag+" X: "+track.X+" Y: "+track.Y+" Altitude: "+track.Altitude+" Timestamp: "+track.TimeStamp+" InAirspace: "+track.InAirSpace+" Compasscourse: "+track.CompassCourse+" Speed: "+track.Speed);
+            Console.WriteLine(s);
         }
-        
+
     }
 }

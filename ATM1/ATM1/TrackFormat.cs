@@ -6,16 +6,25 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public class TrackFormat:IFormat
+    public class TrackFormat : ITrackFormat
     {
-        private List<Track> updatedTrackList;
-    public void Format()
-    {
-        foreach (var track in updatedTrackList)
+
+        private IPrint _print;
+        private string s;
+
+        public TrackFormat()
         {
-            Convert.ToString(track);
+            _print = new TrackPrint();
         }
 
-    }
+        public void Format(List<Track> updatedTrackList)
+        {
+            foreach (var track in updatedTrackList)
+            {
+                s = Convert.ToString(s = Convert.ToString("TRACK: " + "tag: " + track.Tag + ", X-coordinate: " + track.X  +
+                                                          ", Y-coordinate: " + track.Y + ", altitude: " + track.Altitude + ", compass course: " + track.CompassCourse + ", in airspace: " + track.InAirSpace + ", speed: " + track.Speed + ", time: " + track.TimeStamp ));
+                _print.Print(s);
+            }
+        }
     }
 }
