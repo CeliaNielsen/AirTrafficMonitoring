@@ -21,6 +21,9 @@ namespace ATM1
         public ATMController(ITransponderReceiver transponderReceiver)
         {
             transponderReceiver.TransponderDataReady += HandleTransponderSignalEvent; // ATM forbindes til ITransponderReceiver
+
+            airspaceFilter_ = new AirspaceFilter();
+            calculateTrack_ = new CalculateTrack();
             
         }
 
@@ -34,6 +37,7 @@ namespace ATM1
         public List<Track> sortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_ = new List<Track>();
+           rawTracklist = new List<string>();
             foreach (var track in rawTracklist)
             {
                 string[] array = track.Split(';');
@@ -47,8 +51,10 @@ namespace ATM1
 
         public void Start()
         {
-            sortTrackList(RawTrackList);
-            calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            sortTrackList(RawTrackList); // returner den splittede liste
+            //airspaceFilter_.CheckAirspace(sortedTrackList_);
+            //calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+
 
         }
 
