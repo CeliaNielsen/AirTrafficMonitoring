@@ -10,12 +10,16 @@ namespace ATM1
     public class CalculateTrack:ICalculate
     {
         public List<Track> _updatedTrackList { get; private set; }
-        private TrackPrint _trackprint;
-        private DateTime t1;
-        private double x1;
-        private double y1;
-        private string tag1;
+        private List<Track> _oldTrackList;
+        private IPrint _trackprint;
+  
 
+        public CalculateTrack()
+        {
+            _oldTrackList= new List<Track>();
+            _updatedTrackList = new List<Track>();
+            _trackprint = new TrackFormat();
+        }
         public void CalculateCompassCourse(List<Track> trackList)
         { 
             foreach (var airplane in trackList)
@@ -58,35 +62,30 @@ namespace ATM1
 
         public void CalculateSpeed(List<Track> trackList)
         {  
-            foreach (var airplane in trackList) //har vi en liste med de fly som er i airspace? 
+            foreach (var airplane in trackList) 
             {
-                //t1 = airplane.TimeStamp;
-                //double x1 = airplane.X;
-                //double y1 = airplane.Y;
-                //string tag1 = airplane.Tag; 
-                //forkert 
-
-                //Gennemløb listen og se om den er i listen, hvis den ikke er i listen, skal den tilføjes. 
-
-                if (airplane.Tag == tag1 && airplane.X != x1 || airplane.Y != y1) //når samme tag opstår i listen, så den udregne  
+                foreach (var oldairplane in _oldTrackList)
                 {
+                    
+                    if (airplane.Tag == oldairplane.Tag && airplane.X != oldairplane.X || airplane.Y != oldairplane.Y) //når samme tag opstår i listen, så den udregne  
+                    {
+                        //Tidsforskellen
+                        double td = (airplane.TimeStamp - oldairplane.TimeStamp).Hours;
 
-                    DateTime t2 = airplane.TimeStamp;
-                    double x2 = airplane.X;
-                    double y2 = airplane.Y;
+                        //Afstanden er x og y koordinater fra første timestamp til andet timestamp(afstandsformlen)
+                        double distance = Math.Sqrt(Math.Pow((airplane.X - oldairplane.X), 2) + Math.Pow((airplane.Y - oldairplane.Y), 2));
 
-                    //Tidsforskellen
-                    TimeSpan td = t2 - t1;
-
-                    //Afstanden er x og y koordinater fra første timestamp til andet timestamp(afstandsformlen)
-                    double distance = Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2));
-
-                    //Hastigheden fås ved tidsforskellen delt med afstanden
-                    double speed1 = distance / Convert.ToDouble(td);
-                    airplane.Speed = speed1;      
+                        //Hastigheden fås ved tidsforskellen delt med afstanden
+                        double speed1 = distance / td; 
+                        airplane.Speed = speed1;
+                    }
+                      
                 }
+                _oldTrackList.Add(airplane);
+
             } 
             _updatedTrackList = trackList;
+            _oldTrackList = trackList;
             CalculateCompassCourse(trackList);     
         }
 

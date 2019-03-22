@@ -12,20 +12,28 @@ namespace ATM.UnitTest
     [TestFixture] 
     public class TrackPrintUnitTest
     {
-        private TrackPrint _uut;
-        private ITrackPrint _trackprint;
+        private TrackFormat _uut;
+        private IPrint _trackprint;
         private CalculateTrack _calculatetrack;
         
-
         [SetUp]
         public void SetUp()
         {
-            _trackprint = Substitute.For<ITrackPrint>();
+            _trackprint = Substitute.For<IPrint>();
             _calculatetrack = Substitute.For<CalculateTrack>();
-            _uut = new TrackPrint();
+            _uut = new TrackFormat();
         }
-        //tilstandstest for at se om den printer ud det rigtige 
-        //adfærdstest med calculatetrack for at se om den får noget med 
 
+        [Test]
+        public void TrackPrint_PrintTrack_TrackPrinted()
+        {
+
+        }
+
+        [Test]
+        public void TrackPrint_calledByCalculate_ListReceived() 
+        {
+            
+        }
     }
 }

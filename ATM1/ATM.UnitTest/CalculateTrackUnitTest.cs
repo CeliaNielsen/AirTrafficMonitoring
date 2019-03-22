@@ -13,32 +13,47 @@ namespace ATM.UnitTest
     class CalculateTrackUnitTest
     {
         private CalculateTrack _uut;
-        private ATMController _atmController;
+        private IPrint _trackPrint;
 
         [SetUp]
         public void SetUp()
         {
             _uut = new CalculateTrack();
-
-            //CalculateCompass()
-
-
-            //CalculateSpeed()
-            //to positioner med (x og y) og sætter timestamp --> udregn afstand 
-            //Vælg testdata så du ved hvad output giver! 
-            //Prøv også med fortegn 
+            _trackPrint = Substitute.For<TrackFormat>(); 
         }
 
         [Test]
-        public void CalculateTrack_calculateSpeed_returnResult()
+        public void CalculateTrack_CalculateSpeed_returnResult()
         {
-        //    List<Track> currentList = new List<Track>();
-        //    currentList.Add(new Track("ATR423", 0, 0, 100, DateTime.Today, true, null, 0));
-        //    currentList.Add(new Track("ATR423", 3, 4, 100, DateTime.Today, true, null, 0));
-
-                
-        //    Assert.That(_uut._updatedTrackList[7], Is.EqualTo(5));
+            DateTime time1 = new DateTime(2019,09,11,09,10,00);
+            DateTime time2 = new DateTime(2019, 09, 11, 10, 10, 00);
+            List<Track> currentList = new List<Track>();
+            currentList.Add(new Track("ATR423", 0, 0, 100, time1, true, null, 0));
+            currentList.Add(new Track("ATR423", 3, 4, 100, time2, true, null, 0));
+            currentList.Add(new Track("BTR423", 3, 4, 100, time2, true, null, 0));
+            _uut.CalculateSpeed(currentList);
+            //5/1 = 5 
+        
+            Assert.That(_uut._updatedTrackList[1].Speed, Is.EqualTo(5));
         }
 
+        [Test]
+        public void CalculateTrack_CalculateCompassCourse_returnResult()
+        {
+            DateTime time1 = new DateTime(2019, 09, 11, 10, 10, 00);
+            DateTime time2 = new DateTime(2019, 09, 11, 9, 10, 00);
+            List<Track> currentList = new List<Track>();
+            currentList.Add(new Track("ATR423",0,2,100,time1,true,null,0));
+            _uut.CalculateCompassCourse(currentList);
+
+            Assert.That(_uut._updatedTrackList[0].CompassCourse, Is.EqualTo("North"));
+        }
+
+        [Test]
+        public void CalculateTrack_PrintTrack_callsTrackPrint()
+        {
+            _uut.PrintTrack();
+            _trackPrint.Received().PrintTrack(new List<Track>());
+        }
     }
 }

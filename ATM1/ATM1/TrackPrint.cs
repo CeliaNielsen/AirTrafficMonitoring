@@ -6,15 +6,13 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-   public class TrackPrint:ITrackPrint
-    {
-        public void PrintTrack(List<Track> updatedTrackList)
+    class TrackPrint :IPrint
+    {      
+        public void PrintTrack()
         {
-            foreach (var track in updatedTrackList)
-            {
-                Console.WriteLine("Tag: "+track.Tag+" X: "+track.X+" Y: "+track.Y+" Altitude: "+track.Altitude+" Timestamp: "+track.TimeStamp+" InAirspace: "+track.InAirSpace+" Compasscourse: "+track.CompassCourse+" Speed: "+track.Speed);
-            }
-               
+            //Skal printe streng 
+            //Console.WriteLine("Tag: "+track.Tag+" X: "+track.X+" Y: "+track.Y+" Altitude: "+track.Altitude+" Timestamp: "+track.TimeStamp+" InAirspace: "+track.InAirSpace+" Compasscourse: "+track.CompassCourse+" Speed: "+track.Speed);
         }
+        
     }
 }
