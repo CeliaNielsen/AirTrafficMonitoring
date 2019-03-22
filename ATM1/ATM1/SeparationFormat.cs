@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public interface IPrint
+    class SeparationFormat:IFormat
     {
-        void Print();
+        public void Format()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

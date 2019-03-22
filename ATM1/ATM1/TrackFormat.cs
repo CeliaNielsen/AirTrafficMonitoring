@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace ATM1
 {
     public class TrackFormat:IFormat
-
     {
-    public void FormatTrack(List<Track> updatedTrackList)
+        private List<Track> updatedTrackList;
+    public void Format()
     {
         foreach (var track in updatedTrackList)
         {
