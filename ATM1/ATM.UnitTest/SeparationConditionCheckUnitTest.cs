@@ -89,7 +89,7 @@ namespace ATM.UnitTest
             _uut.CheckForSeparation(_fakeTrackList);
 
             _uut.Received(1).SeparationCondition(_uut.separationList);
-            _iseparationsPrint.Received(1).PrintSeparation(); // listen den vil have med her bliver lavet inde i koden ??
+            //_iseparationsPrint.Received(1).PrintSeparation(); // listen den vil have med her bliver lavet inde i koden ??
 
 
         }
