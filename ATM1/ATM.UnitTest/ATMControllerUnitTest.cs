@@ -45,6 +45,7 @@ namespace ATM.UnitTest
         {
             _rawList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
 
+
             Assert.That(_uut.sortTrackList(_rawList)[0].Tag, Is.EqualTo("ATR423"));
         }
 
