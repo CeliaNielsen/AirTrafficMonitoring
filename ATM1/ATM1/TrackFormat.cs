@@ -10,7 +10,7 @@ namespace ATM1
     {
 
         private IPrint _print;
-        private string s;
+        public string s { get; set; }
 
         public TrackFormat()
         {
@@ -21,8 +21,8 @@ namespace ATM1
         {
             foreach (var track in updatedTrackList)
             {
-                s = Convert.ToString(s = Convert.ToString("TRACK: " + "tag: " + track.Tag + ", X-coordinate: " + track.X  +
-                                                          ", Y-coordinate: " + track.Y + ", altitude: " + track.Altitude + ", compass course: " + track.CompassCourse + ", in airspace: " + track.InAirSpace + ", speed: " + track.Speed + ", time: " + track.TimeStamp ));
+                s = Convert.ToString("TRACK: " + "tag: " + track.Tag + ", X-coordinate: " + track.X  +
+                                                          ", Y-coordinate: " + track.Y + ", altitude: " + track.Altitude + ", compass course: " + track.CompassCourse + ", in airspace: " + track.InAirSpace + ", speed: " + track.Speed + ", time: " + track.TimeStamp );
                 _print.Print(s);
             }
         }

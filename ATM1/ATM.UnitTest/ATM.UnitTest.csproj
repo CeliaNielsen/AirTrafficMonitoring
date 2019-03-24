@@ -65,8 +65,8 @@
     <Compile Include="CalculateTrackUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationConditionCheckUnitTest.cs" />
-    <Compile Include="SeparationPrintUnitTest.cs" />
-    <Compile Include="TrackPrintUnitTest.cs" />
+    <Compile Include="SeparationFormatUnitTest.cs" />
+    <Compile Include="TrackFormatUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

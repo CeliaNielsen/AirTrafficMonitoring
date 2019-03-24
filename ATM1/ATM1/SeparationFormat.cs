@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class SeparationFormat:ISeparationFormat
+    public class SeparationFormat:ISeparationFormat
     {
         private IPrint _print;
-        private string s;
+        public string s { get; set; }
 
         public SeparationFormat()
         {
