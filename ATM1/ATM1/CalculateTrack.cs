@@ -11,14 +11,14 @@ namespace ATM1
     {
         public List<Track> _updatedTrackList { get; private set; }
         private List<Track> _oldTrackList;
-        private IPrint _trackprint;
+        private ITrackFormat _trackFormat;
   
 
         public CalculateTrack()
         {
             _oldTrackList= new List<Track>();
             _updatedTrackList = new List<Track>();
-            _trackprint = new TrackFormat();
+            _trackFormat = new TrackFormat();
         }
         public void CalculateCompassCourse(List<Track> trackList)
         { 
@@ -91,7 +91,7 @@ namespace ATM1
 
         public void PrintTrack()
         {
-            _trackprint.PrintTrack(_updatedTrackList);
+            _trackFormat.Format(_updatedTrackList);
         }
 
     }

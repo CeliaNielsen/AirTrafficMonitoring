@@ -13,13 +13,13 @@ namespace ATM.UnitTest
     class CalculateTrackUnitTest
     {
         private CalculateTrack _uut;
-        private IPrint _trackPrint;
+        private ITrackFormat _trackFormat;
 
         [SetUp]
         public void SetUp()
         {
             _uut = new CalculateTrack();
-            _trackPrint = Substitute.For<TrackFormat>(); 
+            _trackFormat = Substitute.For<TrackFormat>(); 
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace ATM.UnitTest
         public void CalculateTrack_PrintTrack_callsTrackPrint()
         {
             _uut.PrintTrack();
-            _trackPrint.Received().PrintTrack(new List<Track>());
+            _trackFormat.Received(1).Format(new List<Track>());
         }
     }
 }

@@ -9,7 +9,7 @@ namespace ATM1
     public class SeparationFormat:ISeparationFormat
     {
         private IPrint _print;
-        private string s;
+        public string s { get; set; }
 
         public SeparationFormat()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    interface ITrackFormat
+    public interface ITrackFormat
     {
         void Format(List<Track> updatedTrackList);
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    class TrackPrint :IPrint
+    public class TrackPrint :IPrint
     {
         public void Print(string s)
         {

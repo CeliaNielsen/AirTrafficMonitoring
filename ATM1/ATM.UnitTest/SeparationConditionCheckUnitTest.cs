@@ -12,7 +12,7 @@ namespace ATM.UnitTest
     class SeparationConditionCheckUnitTest
     {
         private SeparationConditionCheck _uut;
-        private ISeparationsPrint _iseparationsPrint;
+        private ISeparationFormat _iseparationsFormat;
         private ICondition _iCondition;
         private Track _fakeTrack;
         private List<Track> _fakeTrackList;
@@ -24,7 +24,7 @@ namespace ATM.UnitTest
         public void SetUp()
         {
             _uut = new SeparationConditionCheck();
-            _iseparationsPrint = Substitute.For<SeparationPrint>();
+            _iseparationsFormat = Substitute.For<SeparationFormat>();
             _iCondition = Substitute.For<ICondition>();
             _fakeTrackList = new List<Track>();
             _fakeSeparationValuesesList = new List<SeparationValues>();
@@ -75,7 +75,7 @@ namespace ATM.UnitTest
             _uut.CheckForSeparation(_fakeTrackList);
 
             //_uut.Received(1).SeparationCondition(_uut.separationList);
-            _iseparationsPrint.Received(1).PrintSeparation(_uut.separationList); // listen den vil have med her bliver lavet inde i koden ??
+            _iseparationsFormat.Received(1).Format(_uut.separationList); // listen den vil have med her bliver lavet inde i koden ??
 
 
         }
