@@ -19,13 +19,16 @@ namespace ATM1
         private int cnt = 1; // 1 da den så ikke starter med at sammenligne med sig selv
         
 
-        private ISeparationLog separationLog;
-        private ISeparationsPrint separationsPrint;
+        //private ISeparationLog separationLog;
+        private ISeparationFormat separationFormat; 
+        //private ISeparationsPrint separationsPrint;
 
         public SeparationConditionCheck()
         {
             separationList = new List<SeparationValues>();
-           
+            separationFormat = new SeparationFormat();
+            //separationsPrint = new SeparationPrint();
+
         }
 
         public void CheckForSeparation(List<Track> updatedList)
@@ -36,7 +39,7 @@ namespace ATM1
                 {
                     //if (track.Y != updatedList[i].Y && track.X != updatedList[i].X ) // hvis den ikke er lig med det track fra foreach løkken
                     //{
-                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000 && Math.Abs(track.Y - updatedList[i].Y) > -300 && Math.Abs(track.X - updatedList[i].X) > -5000) // checker for konflikt med den foran
+                        if (Math.Abs(track.Y - updatedList[i].Y) < 300 && Math.Abs(track.X - updatedList[i].X) < 5000 /*|| (track.Y - updatedList[i].Y) < -300 && (track.X - updatedList[i].X) < -5000*/) // checker for konflikt med den foran
                         {
                             _time = updatedList[i].TimeStamp;
                             _tag1 = updatedList[i].Tag;
@@ -63,7 +66,8 @@ namespace ATM1
         {
             //OBS: “Separation” condition shall remain raised as long as the two tracks are conflicting.
 
-            separationsPrint.PrintSeparation(svList);
+            //separationsPrint.PrintSeparation(svList);
+            separationFormat.Format(separationList);
         }
 
         //public void DeactivateSeparation(string tag3, string tag4)

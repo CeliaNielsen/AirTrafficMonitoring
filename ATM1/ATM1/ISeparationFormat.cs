@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public class SeparationPrint : IPrint
+    interface ISeparationFormat
     {
-        public void Print(string s)
-        {
-            Console.WriteLine(s);
-        }
+        void Format(List<SeparationValues> list);
     }
-    
 }
