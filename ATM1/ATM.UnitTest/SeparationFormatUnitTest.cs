@@ -37,14 +37,19 @@ namespace ATM.UnitTest
         {
 
             _fakeSeparationValuesesList.Add(new SeparationValues(0, "PLO123", "UIK123", DateTime.Now, true));
-            _fakeSeparationValuesesList.Add(new SeparationValues(1, "WQA123", "UQK123", DateTime.Now, true));
+            //_fakeSeparationValuesesList.Add(new SeparationValues(1, "WQA123", "UQK123", DateTime.Now, true));
+
+            string time = Convert.ToString(DateTime.Now);
 
             _uut.Format(_fakeSeparationValuesesList);
 
-            //Assert.That(_uut.Format(_fakeSeparationValuesesList)[0].Tag1, Is.EqualTo("PLO123")); // som det er nu kan den ikke teste hvad der udskrives men kun hvad der er i listen
-            //Assert.That(_uut.Format(_fakeSeparationValuesesList.)[0].Tag, Is.EqualTo("ATR423"));
-            //hvordan tester jeg at der udksrives?
+            //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123"));
+
+            Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: " + "0" + ", Time: " + time +
+                                                                             ", tag A: " + "PLO123" + ", tag B: " + "UIK123"));
             
+
+
         }
 
         [Test]
@@ -54,7 +59,7 @@ namespace ATM.UnitTest
             _fakeSeparationValuesesList.Add(new SeparationValues(0, "PLO123", "UIK123", DateTime.Now, true));
             _fakeSeparationValuesesList.Add(new SeparationValues(1, "WQA123", "UQK123", DateTime.Now, true));
 
-            _uut.Format(_fakeSeparationValuesesList);
+            _uut.UpdatePrint(_fakeSeparationValuesesList);
 
             _iseparationsPrint.Received(2).Print(_uut.s); // listen den vil have med her bliver lavet inde i koden ??
 

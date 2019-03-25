@@ -17,7 +17,7 @@ namespace ATM1
             _print = new TrackPrint();
         }
 
-        public void Format(List<Track> updatedTrackList)
+        public string Format(List<Track> updatedTrackList)
         {
             foreach (var track in updatedTrackList)
             {
@@ -25,6 +25,14 @@ namespace ATM1
                                                           ", Y-coordinate: " + track.Y + ", altitude: " + track.Altitude + ", compass course: " + track.CompassCourse + ", in airspace: " + track.InAirSpace + ", speed: " + track.Speed + ", time: " + track.TimeStamp );
                 _print.Print(s);
             }
+
+            return s;
+        }
+
+        public void UpdatePrint(List<Track> updatedTrackList)
+        {
+
+            _print.Print(Format(updatedTrackList));
         }
     }
 }

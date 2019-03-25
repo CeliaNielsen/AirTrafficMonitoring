@@ -19,7 +19,9 @@ namespace ATM.UnitTest
         public void SetUp()
         {
             _uut = new CalculateTrack();
+            List<Track> currentList = new List<Track>();
             _trackFormat = Substitute.For<TrackFormat>(); 
+
         }
 
         [Test]
@@ -52,8 +54,13 @@ namespace ATM.UnitTest
         [Test]
         public void CalculateTrack_PrintTrack_callsTrackPrint()
         {
-            _uut.PrintTrack();
-            _trackFormat.Received(1).Format(new List<Track>());
+            DateTime time1 = new DateTime(2019, 09, 11, 09, 10, 00);
+            DateTime time2 = new DateTime(2019, 09, 11, 10, 10, 00);
+            List<Track> currentList = new List<Track>();
+            currentList.Add(new Track("ATR423", 0, 0, 100, time1, true, null, 0));
+            
+            _uut.Update(currentList);
+            _trackFormat.Received(1).UpdatePrint(new List<Track>());
         }
     }
 }

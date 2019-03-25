@@ -18,7 +18,7 @@ namespace ATM1
         public SeparationValues(int nr, string tag1, string tag2, DateTime time, bool conflict)
         {
             Tag1 = tag1;
-            Tag2 = Tag2;
+            Tag2 = tag2;
             Nr = nr;
             Time = time;
             Conflict = conflict;

@@ -34,7 +34,13 @@ namespace ATM.UnitTest
 
                 _fakeTrackList.Add(new Track("ATR423", 20000, 30000, 100, DateTime.Now, true, "North", 70));
 
-                _uut.Format(_fakeTrackList);
+                _uut.UpdatePrint(_fakeTrackList);
+                string time = Convert.ToString(DateTime.Now);
+
+                //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123"));
+
+                Assert.That(_uut.Format(_fakeTrackList), Is.EqualTo("TRACK: " + "tag: " +"ATR423" + ", X-coordinate: " + "20000" +
+                                                                    ", Y-coordinate: " + "30000" + ", altitude: " + "100" + ", compass course: " + "North" + ", in airspace: " + "True" + ", speed: " + "70" + ", time: " + time));
 
 
             }
