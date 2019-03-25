@@ -70,8 +70,6 @@ namespace ATM1
             separationCondition_.CheckForSeparation(airspaceFilter_.CheckAirspace(sortedTrackList_));
 
 
-
-
         }
 
 
