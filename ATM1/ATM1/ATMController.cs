@@ -66,7 +66,7 @@ namespace ATM1
             sortTrackList(RawTrackList); // returner den splittede liste
             //airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
 
-            //calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
             separationCondition_.CheckForSeparation(sortedTrackList_);
 
 
