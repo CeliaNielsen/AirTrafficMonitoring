@@ -42,7 +42,7 @@ namespace ATM1
                 string[] array = track.Split(';');
 
                 sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]), Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                    System.Globalization.CultureInfo.InvariantCulture), Convert.ToBoolean(array[5]) == false, array[6],Convert.ToDouble(array[7])));
+                    System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
             }
             
             return sortedTrackList_;
@@ -51,8 +51,9 @@ namespace ATM1
         public void Start()
         {
             sortTrackList(RawTrackList); // returner den splittede liste
-            //airspaceFilter_.CheckAirspace(sortedTrackList_);
-            //calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            airspaceFilter_.CheckAirspace(sortedTrackList_);
+            calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            calculateTrack_.PrintTrack();
 
 
         }
