@@ -16,7 +16,7 @@ namespace ATM1
             // måske skal der laves en lokal liste som der tjekke igennem istedet, for at undgå overlap eller at listen opdateres imens den løbes igennem??
             foreach (var track in trackList)
             {
-                if (track.X <= 90000 && 10000 <= track.X && track.Y <= 90000 && 10000 <= track.Y)
+                if (track.X <= 95000 && 10000 <= track.X && track.Y <= 95000 && 10000 <= track.Y)
                 {
                     track.InAirSpace = true;
                     _updatedTrackList.Add(track);

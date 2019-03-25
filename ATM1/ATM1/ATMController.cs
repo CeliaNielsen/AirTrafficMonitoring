@@ -29,7 +29,7 @@ namespace ATM1
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            RawTrackList = e.TransponderData;
+            RawTrackList = e.TransponderData; // lock
             Console.WriteLine("The data list was received");
             Start();
             
@@ -37,8 +37,9 @@ namespace ATM1
 
         public List<Track> sortTrackList(List<string> rawTracklist)
         {
+            sortedTrackList_.Clear();
             //sortedTrackList_ = new List<Track>();
-            foreach (var track in rawTracklist)
+            foreach (var track in rawTracklist) // lock
             {
                 string[] array = track.Split(';');
 
@@ -52,9 +53,10 @@ namespace ATM1
         public void Start()
         {
             sortTrackList(RawTrackList); // returner den splittede liste
-            airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
+            //airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
 
             calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+
 
         }
 

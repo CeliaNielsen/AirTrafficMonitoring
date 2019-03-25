@@ -8,6 +8,7 @@ namespace ATM1
 {
     public interface ISeparationFormat
     {
-        void Format(List<SeparationValues> list);
+        //List<string> Format(List<SeparationValues> list);
+        void UpdatePrint(List<SeparationValues> svList);
     }
 }

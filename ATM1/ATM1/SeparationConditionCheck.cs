@@ -67,7 +67,7 @@ namespace ATM1
             //OBS: “Separation” condition shall remain raised as long as the two tracks are conflicting.
 
             //separationsPrint.PrintSeparation(svList);
-            separationFormat.Format(separationList);
+            separationFormat.UpdatePrint(separationList);
         }
 
         //public void DeactivateSeparation(string tag3, string tag4)
