@@ -17,6 +17,9 @@ namespace ATM1
 
         private IFilter airspaceFilter_;
         private ICalculate calculateTrack_;
+        private ICondition separationCondition_;
+
+        private object _lock = new object();
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
@@ -25,11 +28,15 @@ namespace ATM1
             airspaceFilter_ = new AirspaceFilter();
             calculateTrack_ = new CalculateTrack();
             sortedTrackList_ = new List<Track>();
+            separationCondition_ = new SeparationConditionCheck();
         }
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            RawTrackList = e.TransponderData; // lock
+            lock (_lock)
+            {
+                RawTrackList = e.TransponderData; // lock
+            }
             Console.WriteLine("The data list was received");
             Start();
             
@@ -38,15 +45,19 @@ namespace ATM1
         public List<Track> sortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_.Clear();
-            //sortedTrackList_ = new List<Track>();
-            foreach (var track in rawTracklist) // lock
+            lock (_lock)
             {
-                string[] array = track.Split(';');
+                //sortedTrackList_ = new List<Track>();
+                foreach (var track in rawTracklist) // lock
+                {
+                    string[] array = track.Split(';');
 
-                sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]), Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                    System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                    sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
+                        Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
+                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                }
             }
-            
+
             return sortedTrackList_;
         }
 
@@ -55,7 +66,10 @@ namespace ATM1
             sortTrackList(RawTrackList); // returner den splittede liste
             //airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
 
-            calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            //calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            separationCondition_.CheckForSeparation(sortedTrackList_);
+
+
 
 
         }
