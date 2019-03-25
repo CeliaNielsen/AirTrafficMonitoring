@@ -11,7 +11,7 @@ namespace ATM1
     {
         private IPrint _print;
         public string s { get; set; }
-        private List<string> _svStringList;
+        
 
         public SeparationFormat()
         {
@@ -23,7 +23,7 @@ namespace ATM1
             foreach (var sv in svList)
             {
                 s = Convert.ToString("SEPARATION CONDITION: \r\n" + "nr: " + sv.Nr + ", Time: " + sv.Time +
-                                     ", tag A: " + sv.Tag1 + ", tag B" + sv.Tag2);
+                                     ", tag A: " + sv.Tag1 + ", tag B: " + sv.Tag2);
                 
             }
 

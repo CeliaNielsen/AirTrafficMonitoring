@@ -97,7 +97,7 @@ namespace ATM1
 
         public void Update(List<Track> trackList)
         {
-            _trackFormat.Format(_updatedTrackList);
+            _trackFormat.UpdatePrint(_updatedTrackList);
         }
 
     }

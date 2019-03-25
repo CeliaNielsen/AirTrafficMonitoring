@@ -8,6 +8,6 @@ namespace ATM1
 {
     public interface ITrackFormat
     {
-        void Format(List<Track> updatedTrackList);
+        void UpdatePrint(List<Track> updatedTrackList);
     }
 }
