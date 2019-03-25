@@ -11,6 +11,6 @@ namespace ATM1
         void CalculateCompassCourse(List<Track> trackList);
 
         void CalculateSpeed(List<Track> trackList);
-        void PrintTrack(); 
+        void Update(List<Track> trackList); 
     }
 }

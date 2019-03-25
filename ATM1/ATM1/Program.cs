@@ -16,9 +16,11 @@ namespace ATM1
             
             ATMController atmController = new ATMController(transponderReceiverFactory);
 
+            
+
             //Thread atmThread = new Thread(atmController.Start);
             //atmThread.Start();
-            ////atmController.Start();
+            //atmController.Start();
 
             Console.ReadKey();
         }
