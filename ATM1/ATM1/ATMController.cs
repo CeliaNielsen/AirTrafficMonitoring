@@ -70,8 +70,6 @@ namespace ATM1
             separationCondition_.CheckForSeparation(sortedTrackList_);
 
 
-
-
         }
 
 
