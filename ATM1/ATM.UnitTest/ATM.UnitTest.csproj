@@ -66,6 +66,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SeparationConditionCheckUnitTest.cs" />
     <Compile Include="SeparationFormatUnitTest.cs" />
+    <Compile Include="TrackFormatUnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
