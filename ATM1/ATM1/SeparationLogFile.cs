@@ -15,7 +15,7 @@ namespace ATM1
             // log to file
             foreach (var sv in svList)
             {
-                FileStream output = new FileStream(@"C: \Users\Celia\Documents\UNI\4 semester\SWT (Software test )\Handin2\AirTrafficMonitoring\ATM1\ATM1\bin\Debug", FileMode.OpenOrCreate, FileAccess.Write);
+                FileStream output = new FileStream(@"C: \Users\Celia\Documents\UNI\4 semester\SWT (Software test )\Handin2\AirTrafficMonitoring\ATM1\ATM1\bin\Debug\SeparationLogFile.txt", FileMode.OpenOrCreate, FileAccess.Write);
 
                 BinaryFormatter formatter = new BinaryFormatter();
 
