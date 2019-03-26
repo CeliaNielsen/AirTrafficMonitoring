@@ -67,7 +67,7 @@ namespace ATM1
             //airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
 
             calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
-           separationCondition_.CheckForSeparation(sortedTrackList_);
+            separationCondition_.CheckForSeparation(airspaceFilter_.CheckAirspace(sortedTrackList_));
 
 
         }
