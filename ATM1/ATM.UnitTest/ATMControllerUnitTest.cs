@@ -37,7 +37,7 @@ namespace ATM.UnitTest
         public void ATMController_EventFired_ListReceiced()
         {
             _ITransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
-            Assert.That(_uut.RawTrackList, Is.EqualTo(_rawList));
+            Assert.That(/*???*/, Is.EqualTo(_rawList));
         }
 
         [Test]
@@ -49,13 +49,6 @@ namespace ATM.UnitTest
             Assert.That(_uut.sortTrackList(_rawList)[0].Tag, Is.EqualTo("ATR423"));
         }
 
-        //[Test]
-        //public void ATMController_startMethod_callsCalculate()
-        //{
-        //    List<Track> trackList = new List<Track>();
-        //    _uut.Start();
-        //    _filter.Received().CheckAirspace(trackList);
-        //}
         
     }
 
