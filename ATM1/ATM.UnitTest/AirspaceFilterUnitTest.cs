@@ -15,12 +15,16 @@ namespace ATM.UnitTest
     class AirspaceFilterUnitTest
     {
         private AirspaceFilter _uut;
+        //private ATMController _atmController; // der er ikke noget interface til denne, så er dette OK?
+        private ICalculate _calculateTrack;
         private List<Track> _trackList;
 
         [SetUp]
         public void SetUp()
         {
             _trackList= new List<Track>();
+            //_atmController = Substitute.For<ATMController>(); // er det forkert? - det er ikke interface der bruges
+            _calculateTrack = new fakeCalculateTrack();
             _uut = new AirspaceFilter();
         }
 
@@ -29,9 +33,16 @@ namespace ATM.UnitTest
         [TestCase(90000, 90000)]
         public void CheckAirspace_TrackIsInside_returnsTrue(double x, double y)
         {
+            //act
             _trackList.Add(new Track("JCT123", x, y, 500, DateTime.Now, false,"North",90));
+            _calculateTrack.CalculateSpeed(_trackList);
 
-            Assert.That(_uut.CheckAirspace(_trackList)[0].InAirSpace, Is.EqualTo(true));
+
+            //assert
+            Assert.That(_calculateTrack.CalculateSpeed(_trackList)) // kan ikke kalde på listen som eller er gjort public. Tror det er fordi den ikke er med i interfacet
+            // Problem vi støder på -> vi kan ikke lave assert på metoder der ikke returnere noget, og mange af vores metoder er blot void. 
+
+            //Assert.That(_uut.CheckAirspace(_trackList)[0].InAirSpace, Is.EqualTo(true));
 
         }
 
