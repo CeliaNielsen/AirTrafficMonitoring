@@ -11,7 +11,7 @@ namespace ATM1
     public class ATMController
     {
 
-        public List<string> RawTrackList { get; set; }
+        private List<string> _rawTrackList;
         public List<Track> sortedTrackList_ { get; private set;}
         public Track _track { get; private set; }
 
@@ -35,7 +35,7 @@ namespace ATM1
         {
             lock (_lock)
             {
-                RawTrackList = e.TransponderData; // lock
+                _rawTrackList = e.TransponderData; // lock
             }
             Console.WriteLine("The data list was received");
             Start();

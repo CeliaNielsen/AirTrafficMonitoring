@@ -16,7 +16,6 @@ namespace ATM.UnitTest
     {
         private AirspaceFilter _uut;
         private List<Track> _trackList;
-        private ATMController _atmController;
 
         [SetUp]
         public void SetUp()
