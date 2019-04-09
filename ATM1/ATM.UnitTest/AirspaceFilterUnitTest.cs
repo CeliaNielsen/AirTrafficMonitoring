@@ -19,6 +19,7 @@ namespace ATM.UnitTest
         private ICalculate _calculateTrack;
         private List<Track> _trackList;
 
+
         [SetUp]
         public void SetUp()
         {

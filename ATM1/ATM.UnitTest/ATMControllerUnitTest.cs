@@ -18,8 +18,8 @@ namespace ATM.UnitTest
         private ATMController _uut;
         private ITransponderReceiver _ITransponderReceiver;
         private RawTransponderDataEventArgs _transponderEvent ;
-        private ICalculate _calculate;
-        private IFilter _filter;
+        private ICalculate _fakeCalculate;
+        private IFilter _fakeFilter;
 
         private List<string> _rawList;
 
@@ -28,8 +28,8 @@ namespace ATM.UnitTest
         {
             _ITransponderReceiver = Substitute.For<ITransponderReceiver>();
             _uut = new ATMController(_ITransponderReceiver);
-            _calculate = Substitute.For<ICalculate>();
-            _filter = Substitute.For<IFilter>();
+            _fakeCalculate = Substitute.For<ICalculate>();
+            _fakeFilter = Substitute.For<IFilter>();
             _rawList = new List<string>();
         }
 
