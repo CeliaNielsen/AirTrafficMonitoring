@@ -11,12 +11,15 @@ namespace ATM1
     public class ATMController
     {
 
-        public List<string> RawTrackList { get; set; }
+        private List<string> _rawTrackList;
         public List<Track> sortedTrackList_ { get; private set;}
         public Track _track { get; private set; }
 
         private IFilter airspaceFilter_;
         private ICalculate calculateTrack_;
+        private ICondition separationCondition_;
+
+        private object _lock = new object();
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
@@ -25,11 +28,15 @@ namespace ATM1
             airspaceFilter_ = new AirspaceFilter();
             calculateTrack_ = new CalculateTrack();
             sortedTrackList_ = new List<Track>();
+            separationCondition_ = new SeparationConditionCheck();
         }
 
         private void HandleTransponderSignalEvent(object sender, RawTransponderDataEventArgs e)
         {
-            RawTrackList = e.TransponderData; // lock
+            lock (_lock)
+            {
+                _rawTrackList = e.TransponderData; // lock
+            }
             Console.WriteLine("The data list was received");
             Start();
             
@@ -38,24 +45,28 @@ namespace ATM1
         public List<Track> sortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_.Clear();
-            //sortedTrackList_ = new List<Track>();
-            foreach (var track in rawTracklist) // lock
+            lock (_lock)
             {
-                string[] array = track.Split(';');
+                //sortedTrackList_ = new List<Track>();
+                foreach (var track in rawTracklist) // lock
+                {
+                    string[] array = track.Split(';');
 
-                sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]), Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                    System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                    sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
+                        Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
+                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                }
             }
-            
+
             return sortedTrackList_;
         }
 
         public void Start()
         {
-            sortTrackList(RawTrackList); // returner den splittede liste
-            //airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den opdaterede liste
-
-            calculateTrack_.CalculateSpeed(airspaceFilter_.CheckAirspace(sortedTrackList_));
+            sortTrackList(_rawTrackList); // returner den splittede liste
+            var list = airspaceFilter_.CheckAirspace(sortedTrackList_);
+            calculateTrack_.CalculateSpeed(list);
+            separationCondition_.CheckForSeparation(list);
 
 
         }

@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 
 namespace ATM1
 {
-    public class CalculateTrack:ICalculate
+    public class CalculateTrack : ICalculate
     {
         public List<Track> _updatedTrackList { get; private set; }
         private List<Track> _oldTrackList;
         private ITrackFormat _trackFormat;
-  
+
+        private object _lock = new object();
 
         public CalculateTrack()
         {
-            _oldTrackList= new List<Track>();
+            _oldTrackList = new List<Track>();
             _updatedTrackList = new List<Track>();
             _trackFormat = new TrackFormat();
         }
         public void CalculateCompassCourse(List<Track> trackList)
-        { 
+        {
             foreach (var airplane in trackList)
             {
                 if (airplane.X > 0 && airplane.Y > 0)
@@ -54,15 +55,17 @@ namespace ATM1
                 }
                 else
                 {
-                    airplane.CompassCourse = "West"; 
-                }        
+                    airplane.CompassCourse = "West";
+                }
             }
             _updatedTrackList = trackList;
         }
 
         public void CalculateSpeed(List<Track> trackList)
-        {  
-            foreach (var airplane in trackList) 
+        {
+            List<Track> lokalTrackList = new List<Track>(trackList);
+
+            foreach (var airplane in lokalTrackList)
             {
                 if (airplane.InAirSpace == true)
                 {
@@ -84,15 +87,18 @@ namespace ATM1
                             airplane.Speed = speed1;
                         }
                     }
-                    _oldTrackList.Add(airplane);
 
-                    _updatedTrackList = trackList;
-                    _oldTrackList = trackList;
-                    CalculateCompassCourse(trackList);
+                    // _oldTrackList.Add(airplane);}}
+                    
                 }
-            } 
+                
+                
+            }
+            _oldTrackList = trackList;
+            _updatedTrackList = trackList;
+            CalculateCompassCourse(trackList);
             Update(_updatedTrackList);
-            
+
         }
 
         public void Update(List<Track> trackList)

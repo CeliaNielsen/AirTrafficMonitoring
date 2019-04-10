@@ -10,5 +10,6 @@ namespace ATM1
     {
         //List<string> Format(List<SeparationValues> list);
         void UpdatePrint(List<SeparationValues> svList);
+        string Format(List<SeparationValues> svList);
     }
 }
