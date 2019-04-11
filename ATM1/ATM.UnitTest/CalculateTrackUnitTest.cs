@@ -14,7 +14,6 @@ namespace ATM.UnitTest
     {
         private CalculateTrack _uut;
         private ITrackFormat _trackFormat;
-        private IFilter _filter; 
 
         [SetUp]
         public void SetUp()
@@ -22,8 +21,6 @@ namespace ATM.UnitTest
             _uut = new CalculateTrack();
             List<Track> currentList = new List<Track>();
             _trackFormat = Substitute.For<TrackFormat>();
-            _filter = Substitute.For<AirspaceFilter>(); 
-
         }
 
         [Test]
@@ -39,8 +36,8 @@ namespace ATM.UnitTest
             //5/1 = 5 
         
            // Assert.That(_uut._updatedTrackList[0].Speed, Is.EqualTo(5));
+           Assert.That(_trackFormat.)
 
-            //Tilføj værdier til listen i airspacefilter og check værdier i listen i TrackPrint???? 
         }
 
         [Test]
