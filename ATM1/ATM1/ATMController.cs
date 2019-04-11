@@ -12,7 +12,7 @@ namespace ATM1
     {
 
         private List<string> _rawTrackList;
-        public List<Track> sortedTrackList_ { get; private set;}
+        private List<Track> sortedTrackList_;
         public Track _track { get; private set; }
 
         private IFilter airspaceFilter_;
@@ -37,8 +37,7 @@ namespace ATM1
             {
                 _rawTrackList = e.TransponderData; // lock
             }
-            Console.WriteLine("The data list was received");
-            Start();
+            Start(_rawTrackList);
             
         }
 
@@ -58,12 +57,14 @@ namespace ATM1
                 }
             }
 
+           // Start(sortedTrackList_);
+
             return sortedTrackList_;
         }
 
-        public void Start()
+        public void Start(List<string> rawTrackList)
         {
-            sortTrackList(_rawTrackList); // returner den splittede liste
+            sortTrackList(rawTrackList); // returner den splittede liste
             var list = airspaceFilter_.CheckAirspace(sortedTrackList_);
             calculateTrack_.CalculateSpeed(list);
             separationCondition_.CheckForSeparation(list);

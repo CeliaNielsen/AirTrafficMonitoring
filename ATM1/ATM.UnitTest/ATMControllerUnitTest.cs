@@ -22,6 +22,7 @@ namespace ATM.UnitTest
         private IFilter _fakeFilter;
 
         private List<string> _rawList;
+        private List<Track> _trackList;
 
         [SetUp]
         public void SetUp()
@@ -31,13 +32,14 @@ namespace ATM.UnitTest
             _fakeCalculate = Substitute.For<ICalculate>();
             _fakeFilter = Substitute.For<IFilter>();
             _rawList = new List<string>();
+            _trackList = new List<Track>();
         }
 
         [Test]
         public void ATMController_EventFired_ListReceiced()
         {
             _ITransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
-            Assert.That(/*???*/, Is.EqualTo(_rawList));
+           // Assert.That(/*???*/, Is.EqualTo(_rawList));
         }
 
         [Test]
@@ -45,8 +47,12 @@ namespace ATM.UnitTest
         {
             _rawList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
 
+             //_uut.sortTrackList(_rawList);
+             _uut.Start(_rawList);
+            _fakeCalculate.Received(1).CalculateSpeed(_trackList);
+            //Assert.That(_fakeFilter.CheckAirspace(_uut.sortTrackList(_rawList)), Is.Not.Null);
 
-            Assert.That(_uut.sortTrackList(_rawList)[0].Tag, Is.EqualTo("ATR423"));
+            //Assert.That(_uut.sortTrackList(_rawList)[0].Tag, Is.EqualTo("ATR423"));
         }
 
         
