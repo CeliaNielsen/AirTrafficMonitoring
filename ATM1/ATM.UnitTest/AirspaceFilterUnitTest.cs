@@ -40,7 +40,10 @@ namespace ATM.UnitTest
 
 
             //assert
-            Assert.That(_calculateTrack.CalculateSpeed(_trackList)) // kan ikke kalde på listen som eller er gjort public. Tror det er fordi den ikke er med i interfacet
+            //Assert.That(
+            //    _calculateTrack
+            //        .CalculateSpeed(
+            //            _trackList)); // kan ikke kalde på listen som eller er gjort public. Tror det er fordi den ikke er med i interfacet
             // Problem vi støder på -> vi kan ikke lave assert på metoder der ikke returnere noget, og mange af vores metoder er blot void. 
 
             //Assert.That(_uut.CheckAirspace(_trackList)[0].InAirSpace, Is.EqualTo(true));

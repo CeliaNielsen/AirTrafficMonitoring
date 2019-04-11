@@ -42,7 +42,10 @@ namespace ATM.UnitTest
 
             _uut.CheckForSeparation(_fakeTrackList);
             
-            Assert.That(_uut.separationList.Count, Is.EqualTo(2));
+            //Assert.That(_uut.separationList.Count, Is.EqualTo(2));
+
+            //_iseparationsFormat.Received().UpdatePrint(Arg.Is<SeparationValues>(str => str.Tag1("00:00")));
+
             //Assert.That(_iseparationsFormat.UpdatePrint());
             // Problem -> kan ikke sende listen med der skal bruges da den laves inde i uut, og metoden den laves i er en void og kalder en anden metode som tager listen med i parameteren
 
