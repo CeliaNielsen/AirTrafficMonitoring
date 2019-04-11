@@ -16,8 +16,8 @@ namespace ATM.UnitTest
     public class ATMControllerUnitTest
     {
         private ATMController _uut;
-        private ITransponderReceiver _ITransponderReceiver;
-        private RawTransponderDataEventArgs _transponderEvent ;
+        private ITransponderReceiver _fakeTransponderReceiver;
+        private RawTransponderDataEventArgs _transponderEvent;
         private ICalculate _fakeCalculate;
         private IFilter _fakeFilter;
 
@@ -27,19 +27,25 @@ namespace ATM.UnitTest
         [SetUp]
         public void SetUp()
         {
-            _ITransponderReceiver = Substitute.For<ITransponderReceiver>();
-            _uut = new ATMController(_ITransponderReceiver);
+            _fakeTransponderReceiver = Substitute.For<ITransponderReceiver>();
+            _uut = new ATMController(_fakeTransponderReceiver);
             _fakeCalculate = Substitute.For<ICalculate>();
             _fakeFilter = Substitute.For<IFilter>();
             _rawList = new List<string>();
             _trackList = new List<Track>();
+
+            
         }
 
         [Test]
         public void ATMController_EventFired_ListReceiced()
         {
-            _ITransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
-           // Assert.That(/*???*/, Is.EqualTo(_rawList));
+            _rawList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
+            _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
+
+            Assert.That(_uut.sortedTrackList_.Count.Equals(1));
+            //Assert.That(_fakeFilter.CheckAirspace(_trackList).Count.Equals(1));
+
         }
 
         [Test]
@@ -47,15 +53,12 @@ namespace ATM.UnitTest
         {
             _rawList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
 
-             //_uut.sortTrackList(_rawList);
-             _uut.Start(_rawList);
-            _fakeCalculate.Received(1).CalculateSpeed(_trackList);
-            //Assert.That(_fakeFilter.CheckAirspace(_uut.sortTrackList(_rawList)), Is.Not.Null);
+            _uut.SortTrackList(_rawList);
+            Assert.That(_uut.sortedTrackList_[0].Tag, Is.EqualTo("ATR423"));
 
-            //Assert.That(_uut.sortTrackList(_rawList)[0].Tag, Is.EqualTo("ATR423"));
         }
 
-        
+
     }
 
 }

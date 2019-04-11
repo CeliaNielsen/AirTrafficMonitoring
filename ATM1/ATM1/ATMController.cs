@@ -10,11 +10,11 @@ namespace ATM1
 {
     public class ATMController
     {
+        public List<string> _rawTrackList;
+        public List<Track> sortedTrackList_ { get; set; }
+        public Track _track { get; set; }
 
-        private List<string> _rawTrackList;
-        private List<Track> sortedTrackList_;
-        public Track _track { get; private set; }
-
+        private ITransponderReceiver transponderReceiver_;
         private IFilter airspaceFilter_;
         private ICalculate calculateTrack_;
         private ICondition separationCondition_;
@@ -23,6 +23,7 @@ namespace ATM1
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
+            transponderReceiver_ = transponderReceiver;
             transponderReceiver.TransponderDataReady += HandleTransponderSignalEvent; // ATM forbindes til ITransponderReceiver
 
             airspaceFilter_ = new AirspaceFilter();
@@ -35,13 +36,13 @@ namespace ATM1
         {
             lock (_lock)
             {
-                _rawTrackList = e.TransponderData; // lock
+                _rawTrackList = e.TransponderData; // indsætter rå data i liste
             }
-            Start(_rawTrackList);
+            SortTrackList(_rawTrackList);
             
         }
 
-        public List<Track> sortTrackList(List<string> rawTracklist)
+        public void SortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_.Clear();
             lock (_lock)
@@ -49,27 +50,26 @@ namespace ATM1
                 //sortedTrackList_ = new List<Track>();
                 foreach (var track in rawTracklist) // lock
                 {
-                    string[] array = track.Split(';');
+                    string[] array = new string[7];
+                        array = track.Split(';');
 
-                    sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
+                    Track _track = new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
                         Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0);
+
+                    sortedTrackList_.Add(_track);
                 }
             }
 
-           // Start(sortedTrackList_);
-
-            return sortedTrackList_;
+           Start();
         }
 
-        public void Start(List<string> rawTrackList)
+        public void Start()
         {
-            sortTrackList(rawTrackList); // returner den splittede liste
-            var list = airspaceFilter_.CheckAirspace(sortedTrackList_);
+           // sortTrackList(rawTrackList); // returner den splittede liste
+            var list = airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den filterede liste
             calculateTrack_.CalculateSpeed(list);
             separationCondition_.CheckForSeparation(list);
-
-
         }
 
 
