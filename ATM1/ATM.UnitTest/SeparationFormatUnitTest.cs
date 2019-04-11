@@ -42,14 +42,17 @@ namespace ATM.UnitTest
             string time = Convert.ToString(DateTime.Now);
 
             _uut.Format(_fakeSeparationValuesesList);
+            var s = "SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123";
 
             //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123"));
 
-            Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: " + "0" + ", Time: " + time +
-                                                                             ", tag A: " + "PLO123" + ", tag B: " + "UIK123"));
-            
+            //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: " + "0" + ", Time: " + time +
+            //                                                                 ", tag A: " + "PLO123" + ", tag B: " + "UIK123"));
 
+           
+           _iseparationsPrint.Received().Print(Arg.Is<string>(str => str.Contains("c"))); // burde fejle men melder korrekt ???
 
+            //Assert.That(_iseparationsPrint.Print(_uut.s), Is.EqualTo(s));
         }
 
         [Test]
