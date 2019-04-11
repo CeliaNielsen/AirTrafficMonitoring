@@ -40,7 +40,7 @@ namespace ATM.UnitTest
             _fakeTrackList.Add(new Track("OPW256", 10001, 30000, 12, DateTime.Now, true, "test", 220));
             _fakeTrackList.Add(new Track("UQL456", 10001, 30000, 12, DateTime.Now, true, "test", 320));
 
-            _uut.CheckForSeparation(_fakeTrackList);
+            //_uut.CheckForSeparation(_fakeTrackList);
             
             //Assert.That(_uut.separationList.Count, Is.EqualTo(2));
 
