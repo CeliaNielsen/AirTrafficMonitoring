@@ -10,19 +10,20 @@ namespace ATM1
 {
     public class ATMController
     {
-
         private List<string> _rawTrackList;
-        public List<Track> sortedTrackList_ { get; private set;}
-        public Track _track { get; private set; }
+        private List<Track> sortedTrackList_;
+        private Track _track { get; set; }
 
-        private IFilter airspaceFilter_;
-        private ICalculate calculateTrack_;
-        private ICondition separationCondition_;
+        private ITransponderReceiver transponderReceiver_;
+        public IFilter airspaceFilter_ { get; set; }
+        public ICalculate calculateTrack_ { get; set; }
+        public ICondition separationCondition_ { get; set; }
 
         private object _lock = new object();
 
         public ATMController(ITransponderReceiver transponderReceiver)
         {
+            transponderReceiver_ = transponderReceiver;
             transponderReceiver.TransponderDataReady += HandleTransponderSignalEvent; // ATM forbindes til ITransponderReceiver
 
             airspaceFilter_ = new AirspaceFilter();
@@ -35,14 +36,13 @@ namespace ATM1
         {
             lock (_lock)
             {
-                _rawTrackList = e.TransponderData; // lock
+                _rawTrackList = e.TransponderData; // indsætter rå data i liste
             }
-            Console.WriteLine("The data list was received");
-            Start();
+            SortTrackList(_rawTrackList);
             
         }
 
-        public List<Track> sortTrackList(List<string> rawTracklist)
+        public void SortTrackList(List<string> rawTracklist)
         {
             sortedTrackList_.Clear();
             lock (_lock)
@@ -50,25 +50,26 @@ namespace ATM1
                 //sortedTrackList_ = new List<Track>();
                 foreach (var track in rawTracklist) // lock
                 {
-                    string[] array = track.Split(';');
+                    string[] array = new string[7];
+                        array = track.Split(';');
 
-                    sortedTrackList_.Add(new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
+                    Track _track = new Track(array[0], Convert.ToDouble(array[1]), Convert.ToDouble(array[2]),
                         Convert.ToDouble(array[3]), DateTime.ParseExact(array[4], "yyyyMMddHHmmssfff",
-                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0));
+                            System.Globalization.CultureInfo.InvariantCulture), false, "0", 0);
+
+                    sortedTrackList_.Add(_track);
                 }
             }
 
-            return sortedTrackList_;
+           Start();
         }
 
         public void Start()
         {
-            sortTrackList(_rawTrackList); // returner den splittede liste
-            var list = airspaceFilter_.CheckAirspace(sortedTrackList_);
+           // sortTrackList(rawTrackList); // returner den splittede liste
+            var list = airspaceFilter_.CheckAirspace(sortedTrackList_); // returner den filterede liste
             calculateTrack_.CalculateSpeed(list);
             separationCondition_.CheckForSeparation(list);
-
-
         }
 
 
