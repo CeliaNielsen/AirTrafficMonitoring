@@ -10,14 +10,14 @@ namespace ATM1
 {
     public class ATMController
     {
-        public List<string> _rawTrackList;
-        private List<Track> sortedTrackList_ { get; set; }
-        public Track _track { get; set; }
+        private List<string> _rawTrackList;
+        private List<Track> sortedTrackList_;
+        private Track _track { get; set; }
 
         private ITransponderReceiver transponderReceiver_;
-        public IFilter airspaceFilter_;
-        public ICalculate calculateTrack_;
-        public ICondition separationCondition_;
+        public IFilter airspaceFilter_ { get; set; }
+        public ICalculate calculateTrack_ { get; set; }
+        public ICondition separationCondition_ { get; set; }
 
         private object _lock = new object();
 
