@@ -31,6 +31,7 @@ namespace ATM.UnitTest
             List<Track> currentList = new List<Track>();
             currentList.Add(new Track("ATR423", 0, 0, 100, time1, true, null, 0));
             currentList.Add(new Track("ATR423", 3, 4, 100, time2, true, null, 0));
+
             currentList.Add(new Track("BTR423", 3, 4, 100, time2, true, null, 0));
             _uut.CalculateSpeed(currentList);
             //5/1 = 5 
