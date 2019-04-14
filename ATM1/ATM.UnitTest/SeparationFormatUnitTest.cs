@@ -42,16 +42,12 @@ namespace ATM.UnitTest
             string time = Convert.ToString(DateTime.Now);
 
             _uut.Format(_fakeSeparationValuesesList);
+            var s = "SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123";
 
-            //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: 0, Time: " + time + ", tag A: PLO123, tag B: UIK123"));
+           
+           _iseparationsPrint.Received().Print(Arg.Is<string>(str => str.Equals(s))); 
 
-            //Assert.That(_uut.Format(_fakeSeparationValuesesList), Is.EqualTo("SEPARATION CONDITION: \r\n" + "nr: " + "0" + ", Time: " + time +
-            //                                                                 ", tag A: " + "PLO123" + ", tag B: " + "UIK123"));
-
-            //output.Received().OutputLine(Arg.Is<string>(str => str.Contains("00:05")));
-
-            _iseparationsPrint.Received().Print(Arg.Is<string>(str => str.Contains("PL0123")));
-
+           
         }
 
         [Test]
@@ -63,7 +59,7 @@ namespace ATM.UnitTest
 
             _uut.UpdatePrint(_fakeSeparationValuesesList);
 
-            _iseparationsPrint.Received(2).Print(_uut.s); // listen den vil have med her bliver lavet inde i koden ??
+            _iseparationsPrint.Received(2).Print(_uut.s); 
 
         }
 
