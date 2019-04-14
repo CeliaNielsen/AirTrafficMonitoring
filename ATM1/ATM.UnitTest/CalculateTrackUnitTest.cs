@@ -13,19 +13,20 @@ namespace ATM.UnitTest
     class CalculateTrackUnitTest
     {
         private CalculateTrack _uut;
-        private ITrackFormat _trackFormat;
+        private ITrackFormat _faketrackFormat;
 
         [SetUp]
         public void SetUp()
         {
             _uut = new CalculateTrack();
             List<Track> currentList = new List<Track>();
-            _trackFormat = Substitute.For<TrackFormat>();
+            _faketrackFormat = Substitute.For<TrackFormat>();
         }
 
         [Test]
         public void CalculateTrack_CalculateSpeed_returnResult()
         {
+          
             DateTime time1 = new DateTime(2019, 09, 11, 09, 10, 00);
             DateTime time2 = new DateTime(2019, 09, 11, 10, 10, 00);
             List<Track> currentList = new List<Track>();
@@ -34,11 +35,11 @@ namespace ATM.UnitTest
 
             currentList.Add(new Track("BTR423", 3, 4, 100, time2, true, null, 0));
             _uut.CalculateSpeed(currentList);
-            //5/1 = 5 
 
             // Assert.That(_uut._updatedTrackList[0].Speed, Is.EqualTo(5));
-            //_trackFormat.Received().Format(Arg.Is<List<Track>>(str => str.Contains("ATR423", 3, 4, 100, time2, true, null, 0)));
-          
+            _faketrackFormat.Received(1).Format(Arg.Is<List<Track>>(sp => sp.Count == 1 && sp[7].Speed == 5)); 
+
+
         }
 
         [Test]
@@ -62,7 +63,7 @@ namespace ATM.UnitTest
             currentList.Add(new Track("ATR423", 0, 0, 100, time1, true, null, 0));
 
             _uut.Update(currentList);
-            _trackFormat.Received(1).UpdatePrint(new List<Track>());
+            _faketrackFormat.Received(1).UpdatePrint(new List<Track>());
         }
     }
 }
