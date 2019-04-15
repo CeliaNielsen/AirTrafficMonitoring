@@ -49,7 +49,6 @@ namespace ATM.UnitTest
             _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
 
             // Assert
-            // Assert.That(_uut.sortedTrackList_.Count.Equals(1));
             _fakeCalculate.Received(1).CalculateSpeed(Arg.Is<List<Track>>(l => l.Count == 1));
 
         }
@@ -62,14 +61,11 @@ namespace ATM.UnitTest
             _uut.calculateTrack_ = _fakeCalculate;
 
             _rawList.Add("ATR423;39045;12932;14000;20151006213456789;false;North;0");
+            
             // Act
             _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
 
             // Assert
-            // Assert.That(_uut.sortedTrackList_.Count.Equals(1));
-           // _fakeCalculate.Received(1).CalculateSpeed(Arg.Is<List<Track>>(l => l.Count == 1));
-            // _fakeFilter.Received(1).CheckAirspace(Arg.Is<List<Track>>(l => l.Count == 1));
-            //Assert.That(_fakeFilter.CheckAirspace(_trackList).Count.Equals(1));
             _fakeSeparationConditionCheck.Received(1).CheckForSeparation(Arg.Is<List<Track>>(l => l.Count == 1 && l[0].Tag == "ATR423"));
         }
 
@@ -85,7 +81,6 @@ namespace ATM.UnitTest
             _fakeTransponderReceiver.TransponderDataReady += Raise.EventWith(new RawTransponderDataEventArgs(_rawList));
 
             // Assert
-            // Assert.That(_uut.sortedTrackList_.Count.Equals(1));
             _fakeFilter.Received(1).CheckAirspace(Arg.Is<List<Track>>(l => l.Count == 1));
         }
 
